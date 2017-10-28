@@ -1,3 +1,6 @@
+---
+title: "Setup a Static Web Server"
+---
 # Setup a static web server
 
 If you want to build a website, sooner or later you need a way to test it and verify that users will be presented with what you intended to. In order to do so, you need a webserver.
