@@ -87,3 +87,20 @@ Although [Jekyll](https://jekyllrb.com) will scan through all your repository, s
 * `index.html` : the index page of your site (we already created it).
 
 The other directories are not directly used by us and are only important if you are going to build your own Jekyll engine. Since we are not going to do it yet, we'll skip them. So, now go on and create the files and directories in your `name.github.io` repository as requested.
+
+Now, let's open the newly created `_config.yml` file and make some general configuration.
+
+> Note: these are the configuration I made to this website. They are reported here for documentation. You can make your own. Read the documentation and decide what you want to do with your site!
+
+```
+timezone: Europe/Prague
+show_drafts: FALSE
+future: FALSE
+defaults:
+  -
+    scope:
+      path: "" # an empty string here means all files in the project
+    values:
+      layout: "default"
+      author: "Antonello Izzi"
+```
