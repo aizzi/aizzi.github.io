@@ -1,7 +1,13 @@
 ---
-title: "Setup a Static Web Server"
+title: "Publishing your website on GitHub Pages"
 ---
-# Setup a static web server
+# Publishing your website on GitHub pages
+
+1. [Activate GitHub Pages](activate-github-pages)
+2. [Configuring the website](configuring-the-website)
+
+--
+## Activate GitHub Pages
 
 If you want to build a website, sooner or later you need a way to test it and verify that users will be presented with what you intended to. In order to do so, you need a webserver.
 
@@ -52,3 +58,32 @@ Now, clone the repository on your computer and you are ready to go.
 The nice part of this setup is that publishing your site is as easy as pushing your commits to the master branch of `<username>.github.io` repository. The GitHub Jekyll backend will do the rest, processing your site and publishing it.
 
 > Note: since your commit has to be processed by the Jekyll engine, it could take a while before you see your changes published. Be patient and allow for it to work. Later on in this course we will setup a local Jekyll environment to test your changes before to push them, but for now what we have is more than enough.
+
+A really valuable resource about how to work with Jekyll on GitHub Pages can be found [here](http://jmcglone.com/guides/github-pages/).
+
+[Jekyll](https://jekyllrb.com) will run through your repository, ingest all your files, transform them as needed and serve them out as a static website which can be served on the internet.
+
+The nice part of this is that, unlike Medium, or Linkedin or Blogger your posts and articles are still yours. You can control what goes up, and take it down as you like. If GitHub should close tomorrow, you will still have your website right there on your hard disk, ready to be publish somewhere else.
+
+[Jekyll](https://jekyllrb.com) is blogging aware, meaning that if you maintain a specific naming convention for your files, it will be easy to publish your articles and serve them as a blog.
+
+As a bonus, it will be extremely easy to link your Git project's documentation to your *site*, making it the very centre of your internet presence. Later on, you can still migrate it to a webserver able to provide dynamic content if you need. But until then, why bother with maintaining such an environment?
+
+This tutorial is mostly the documentation of how this very site was developed from scratch. This means that I will update it while I progress in designing my site.
+
+I will proceed by steps, building one feature after the other, solving problems as they present themselves and documenting all the steps and the choices I make. I have some HTML and CSS knowledge, as well as some programming skills, but it has been a while since I used them and lot of things did change over time. This means that sometimes I will come back to change something because I find a better way to do it, or because I simply changed my mind. All those changes will be documented here.
+
+--
+## Configuring the website
+Although [Jekyll](https://jekyllrb.com) will scan through all your repository, some directories and files have a special meaning to it. Jekyll's directory structure is described [here](https://jekyllrb.com/docs/structure/). I will not repeat what's already described in the documentation, but summarizing it in a Jekyll enabled site you will find the following:
+
+* `_config.yml` : a configuration file for Jekyll features, accurately described [here](https://jekyllrb.com/docs/configuration/)
+* `_data` : it will contains all data used throughout your site. Any files stored in this directory can be accessed via a `site.data` variable.
+* `_drafts` : this directory will contain all the drafts of your articles
+* `_includes` : this directory contains files that can be included in other files in your site using the liquid tag {% include file.ext %}
+* `_layouts` : this directory contains the template used to render your web pages. Providing the right [YAML FrontMatter](https://jekyllrb.com/docs/frontmatter/) in a file, you can insert the content of the file in the choosen template by using the tag `{{ content }}`
+* `_posts` : this directory contains your blog articles, using the naming convention `yyyy-mm-dd-title-of-the-article.md`
+* `_sass` : this directory contains the [sass](https://sass-lang.com/) files used throughout your website
+* `index.html` : the index page of your site (we already created it).
+
+The other directories are not directly used by us and are only important if you are going to build your own Jekyll engine. Since we are not going to do it yet, we'll skip them. So, now go on and create the files and directories in your `name.github.io` repository as requested.
