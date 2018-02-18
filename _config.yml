@@ -1,4 +1,4 @@
-timezone: Europe/Prague
+timezone: "Europe/Prague"
 show_drafts: FALSE
 future: FALSE
 defaults:
