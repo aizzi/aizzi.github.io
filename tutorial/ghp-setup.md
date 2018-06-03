@@ -140,7 +140,7 @@ defaults:
       path: "" # apply this default to all files in the project
       type: ["pages", "posts"] # apply only to pages and posts
     values:
-      layout: "dafault"
+      layout: "default"
 ```
 
 Now remove the FrontMatter in `index.html`, since it was defined into the `_config.yml`, and add some text to see the changes. Commit and push your updates to see if it works.

@@ -8,6 +8,6 @@ defaults:
   -
     scope:
       path: "" # apply this default to all files in the project
-      type: "pages" # apply only to pages and posts
+      type: ["pages", "posts"] # apply only to pages and posts
     values:
-      layout: "dafault"
+      layout: "default"
