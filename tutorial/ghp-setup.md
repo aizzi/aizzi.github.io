@@ -143,6 +143,10 @@ defaults:
       layout: "default"
 ```
 
-Now remove the FrontMatter in `index.html`, since it was defined into the `_config.yml`, and add some text to see the changes. Commit and push your updates to see if it works.
+Now: 
+* rename `index.html` to `index.md`
+* remove the FrontMatter in `index.md`, since it was defined into the `_config.yml`
+* add some text to see the changes.
+* Commit and push your updates to see if it works.
 
 {% endraw %}
