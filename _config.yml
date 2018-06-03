@@ -5,11 +5,15 @@ theme: jekyll-theme-architect
 title: "Tetriminos"
 description: "Filling my life with pieces of knowledge"
 
+# collections
+collections:
+  - tutorials
+
 # Setting defaults configurations
 defaults:
   -
     scope:
       path: "" # apply this default to all files in the project
-      type: ["pages", "posts"] # apply only to pages and posts
+      type: ["pages", "posts", "tutorials"] # apply only to pages and posts
     values:
       layout: "default"

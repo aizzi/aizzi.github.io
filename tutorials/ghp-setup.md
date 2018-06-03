@@ -5,6 +5,7 @@
 2. [Configuring the website](configuring-the-website)
 3. [Site Layout](site-layout)
 4. [Customize the Layout](customize-the-layout)
+5. [Define a Collection](define-a-collection)
 
 --
 ## Activate GitHub Pages
@@ -27,11 +28,11 @@ By now you should have created your GitHub profile. For example, my public profi
 
 In order to create your GitHub Pages user site, you must create a new repository called `<username>.github.com`. Pay attention, that it must exactly match your username. If you are in doubt, you can find your username on the top-left side of your profile page, under your picture.
 
-![username location](img/img01.png)
+![username location](/assets/img/ghp-setup_img01.png)
 
 So, go on and create it.
 
-![create aizzi.github.io](img/img02.png)
+![create aizzi.github.io](/assets/img/ghp_setup-img02.png)
 
 Once it is created, create the index page of your site `index.html` and copy the following text in it (changing my name with your one):
 
@@ -164,14 +165,35 @@ At this point, you should have a working page you can reach at the url '<usernam
 
 In order to have a website, you need to add contents, such as pages, and blog posts. Let's start with pages, like this tutorial for example. In order to do so, you must decide upfront the directory structure of your website.
 
-In my case, I decided that I'd like to have a specific type of content that I will call *tutorials*. Tutorials are one-page articles, containing a step-by-step guide about a specific issue. These files will be stored in a specific directory called 'tutorials'.
-
-I want to use the right column of the theme I choose as a navigation column, allowing visitors of my site to reach out for the different sections of the sites.
+For example, I want to use the right column of the theme I choose as a navigation column, allowing visitors of my site to reach out for the different sections of the sites.
 
 Unfortunately, the standard layout provided does not allow for this out-of-the-box, so I'll have to modify it a little bit. This will require some knowledge of HTML and CSS.
 
-The first step is to do create a `_layouts/default.html` file in your site, and copy in it the content of the `_layouts/default.html` file of the chosen theme. Now, the local copy will be used by Jekyll instead on the standard one, and you can modify it to suit your needs.
+Create a `_layouts/default.html` file in your site, and copy in it the content of the `_layouts/default.html` file of the chosen theme. Now, the local copy will be used by Jekyll instead on the standard one, and you can modify it to suit your needs.
 
-Now, create the `tutorials/index.md` file. This will be the starting page when someone reaches the `<username>.github.io/tutorials` url.
+--
+## Define a Collection
+
+I decided that I'd like to have a specific type of content that I will call *tutorials*. Tutorials are one-page articles, containing a step-by-step guide about a specific issue. These files will be stored in a specific directory called 'tutorials', and will be defined as a specific [Collection](https://jekyllrb.com/docs/collections/).
+
+Start by creating the `tutorials/index.md` file. This will be the starting page when someone reaches the `<username>.github.io/tutorials` url.
+
+Then, define the collection into the `_config.yml` file:
+
+```
+# collections
+collections:
+  - tutorials
+```
+
+Then, edit the `tutorials/index.md` and insert the following:
+
+```
+# Tutorials
+
+{% for tutorial in site.tutorials %}
+  <p>{{ tutorial.url }}
+{% endfor %}
+```
 
 {% endraw %}
