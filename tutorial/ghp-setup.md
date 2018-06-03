@@ -5,6 +5,7 @@ title: "Publishing your website on GitHub Pages"
 
 1. [Activate GitHub Pages](activate-github-pages)
 2. [Configuring the website](configuring-the-website)
+3. [Customize the layout](customize-the-layout)
 
 --
 ## Activate GitHub Pages
@@ -96,11 +97,25 @@ Now, let's open the newly created `_config.yml` file and make some general confi
 timezone: Europe/Prague
 show_drafts: FALSE
 future: FALSE
-defaults:
-  -
-    scope:
-      path: "" # an empty string here means all files in the project
-    values:
-      layout: "default"
-      author: "Antonello Izzi"
 ```
+
+--
+## Customize the layout
+
+At this point, we have a very simple, old style static web site. If you know CSS and HTML, you can start working on the front-end, customizing the layout as you like. But what if you don't know CSS and/or don't want to invest time in working on the site layout? Maybe you, like me, are more interested in using the site to store your notes, projects, posts and tutorials.
+
+Luckily for you, GitHub Pages provides you with a series of Jekyll themes you can choose from in order to help you. Let's see how you can enable one of these themes for your site.
+
+First of all, navigate to your `<username>.github.io` repository. Open the `Settings` and scroll down to the `GitHub Pages` section. There, you can find the `Theme Chooser` option. Do you see that nice button ```Chose a theme```? Well, go on and click on it!
+
+You will be presented with a list of themes to choose from. Choose the one that suits you most and click on the `Select theme` button when done. For this site, I've chosen the [Architect Theme](https://github.com/pages-themes/architect), but you can select whatever you like.
+
+Be aware that, if you have a customize `_config.yml` file (as I have), you must enable the new theme in that file by adding the following line:
+
+```
+theme: jekyll-theme-architect
+```
+
+Read the documentation of the theme you choose in order to understand what to add for your one.
+
+Now, if you refresh your page, you should get the new style.
