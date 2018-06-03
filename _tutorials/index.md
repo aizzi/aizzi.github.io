@@ -1,6 +1,6 @@
 ---
 ---
-# Tutorials test 9
+# Tutorials test 10
 
 <p>{{ page.type }}</p>
 {% for tutorial in site.tutorials %}

@@ -9,6 +9,7 @@ description: "Filling my life with pieces of knowledge"
 collections:
   tutorials:
     output: true
+    type: tutorials
 
 # Setting defaults configurations
 defaults:
