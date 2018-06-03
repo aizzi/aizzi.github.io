@@ -174,25 +174,26 @@ Create a `_layouts/default.html` file in your site, and copy in it the content o
 --
 ## Define a Collection
 
-I decided that I'd like to have a specific type of content that I will call *tutorials*. Tutorials are one-page articles, containing a step-by-step guide about a specific issue. These files will be stored in a specific directory called 'tutorials', and will be defined as a specific [Collection](https://jekyllrb.com/docs/collections/).
+I decided that I'd like to have a specific type of content that I will call *tutorials*. Tutorials are one-page articles, containing a step-by-step guide about a specific issue. These files will be stored in a specific directory called `_tutorials`, and will be defined as a specific [Collection](https://jekyllrb.com/docs/collections/).
 
-Start by creating the `tutorials/index.md` file. This will be the starting page when someone reaches the `<username>.github.io/tutorials` url.
+Start by creating the `_tutorials/index.md` file. This will be the starting page when someone reaches the `<username>.github.io/tutorials` url.
 
 Then, define the collection into the `_config.yml` file:
 
 ```
 # collections
 collections:
-  - tutorials
+  tutorials:
+    output: true
 ```
 
-Then, edit the `tutorials/index.md` and insert the following:
+Then, edit the `_tutorials/index.md` and insert the following:
 
 ```
 # Tutorials
 
 {% for tutorial in site.tutorials %}
-  <p>{{ tutorial.url }}
+  <p>{{ tutorial.url }}</p>
 {% endfor %}
 ```
 
