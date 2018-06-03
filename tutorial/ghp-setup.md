@@ -79,7 +79,7 @@ Although [Jekyll](https://jekyllrb.com) will scan through all your repository, s
 * `_data` : it will contains all data used throughout your site. Any files stored in this directory can be accessed via a `site.data` variable.
 * `_drafts` : this directory will contain all the drafts of your articles
 * `_includes` : this directory contains files that can be included in other files in your site using the liquid tag ```{% include file.ext %}```
-* `_layouts` : this directory contains the template used to render your web pages. Providing the right [YAML FrontMatter](https://jekyllrb.com/docs/frontmatter/) in a file, you can insert the content of the file in the choosen template by using the tag `{{ content }}`
+* `_layouts` : this directory contains the template used to render your web pages. Providing the right [YAML FrontMatter](https://jekyllrb.com/docs/frontmatter/) in a file, you can insert the content of the file in the choosen template by using the tag ```{{ content }}```
 * `_posts` : this directory contains your blog articles, using the naming convention `yyyy-mm-dd-title-of-the-article.md`
 * `_sass` : this directory contains the [sass](https://sass-lang.com/) files used throughout your website
 * `index.html` : the index page of your site (we already created it).
@@ -107,7 +107,9 @@ First of all, navigate to your `<username>.github.io` repository. Open the `Sett
 
 You will be presented with a list of themes to choose from. Choose the one that suits you most and click on the `Select theme` button when done. For this site, I've chosen the [Architect Theme](https://github.com/pages-themes/architect), but you can select whatever you like.
 
-Be aware that, if you have a customize `_config.yml` file (as I have), you must enable the new theme in that file by adding the following line:
+Now, let's modify our site to use the theme.
+
+First of all customize the `_config.yml` file to enable the new theme by adding the following line:
 
 ```
 theme: jekyll-theme-architect
@@ -115,4 +117,14 @@ theme: jekyll-theme-architect
 
 Read the documentation of the theme you choose in order to understand what to add for your one.
 
-Now, if you refresh your page, you should get the new style.
+Then, modify the `index.html` file to use the layout:
+
+```
+---
+layout: default
+---
+```
+
+By specifying the layout, Jekyll will replace the ```{{ content }}``` tag in the `_layouts\default.html` file provided by the theme with the actual content of the file (which is empty, for now).
+
+Commit and push your updates and refresh the page. If everything is fine, you should get an empty page with the new graphics.
