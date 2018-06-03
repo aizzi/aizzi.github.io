@@ -3,7 +3,8 @@
 
 1. [Activate GitHub Pages](activate-github-pages)
 2. [Configuring the website](configuring-the-website)
-3. [Customize the layout](customize-the-layout)
+3. [Site Layout](site-layout)
+4. [Customize the Layout](customize-the-layout)
 
 --
 ## Activate GitHub Pages
@@ -98,7 +99,7 @@ future: FALSE
 ```
 
 --
-## Customize the layout
+## Site Layout
 
 At this point, we have a very simple, old style static web site. If you know CSS and HTML, you can start working on the front-end, customizing the layout as you like. But what if you don't know CSS and/or don't want to invest time in working on the site layout? Maybe you, like me, are more interested in using the site to store your notes, projects, posts and tutorials.
 
@@ -155,5 +156,22 @@ Finally, as the last step of this phase, let's customize the Title and the descr
 title: "Tetriminos"
 description: "Filling (my) life with pieces of knowledge"
 ```
+
+--
+## Customize the Layout
+
+At this point, you should have a working page you can reach at the url '<username>.github.io', that will show you the content of the `index.md` file in your root directory.
+
+In order to have a website, you need to add contents, such as pages, and blog posts. Let's start with pages, like this tutorial for example. In order to do so, you must decide upfront the directory structure of your website.
+
+In my case, I decided that I'd like to have a specific type of content that I will call *tutorials*. Tutorials are one-page articles, containing a step-by-step guide about a specific issue. These files will be stored in a specific directory called 'tutorials'.
+
+I want to use the right column of the theme I choose as a navigation column, allowing visitors of my site to reach out for the different sections of the sites.
+
+Unfortunately, the standard layout provided does not allow for this out-of-the-box, so I'll have to modify it a little bit. This will require some knowledge of HTML and CSS.
+
+The first step is to do create a `_layout/default.html` file in my site, and copy in it the content of the theme.
+
+Now, the local copy of the file will be used by Jekyll instead on the online one. So, I can modify it as it suits me better.
 
 {% endraw %}
