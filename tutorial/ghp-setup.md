@@ -143,10 +143,17 @@ defaults:
       layout: "default"
 ```
 
-Now: 
+Now:
 * rename `index.html` to `index.md`
 * remove the FrontMatter in `index.md`, since it was defined into the `_config.yml`
 * add some text to see the changes.
 * Commit and push your updates to see if it works.
+
+Finally, as the last step of this phase, let's customize the Title and the description of the site. The chosen theme supports two general configuration variables for that: `title` and `description`. Let's add those into the `_config.yaml` file to set the corresponding values in the page header.
+
+```
+title: "Tetriminos"
+description: "Filling (my) life with pieces of knowledge"
+```
 
 {% endraw %}

@@ -2,12 +2,14 @@ timezone: "Europe/Prague"
 show_drafts: FALSE
 future: FALSE
 theme: jekyll-theme-architect
+title: "Tetriminos"
+description: "Filling my life with pieces of knowledge"
 
 # Setting defaults configurations
 defaults:
   -
     scope:
       path: "" # apply this default to all files in the project
-      type: ["pages", "posts"] # apply only to pages and posts 
+      type: ["pages", "posts"] # apply only to pages and posts
     values:
       layout: "default"
