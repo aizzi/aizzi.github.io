@@ -170,8 +170,8 @@ I want to use the right column of the theme I choose as a navigation column, all
 
 Unfortunately, the standard layout provided does not allow for this out-of-the-box, so I'll have to modify it a little bit. This will require some knowledge of HTML and CSS.
 
-The first step is to do create a `_layout/default.html` file in my site, and copy in it the content of the theme.
+The first step is to do create a `_layouts/default.html` file in your site, and copy in it the content of the `_layouts/default.html` file of the chosen theme. Now, the local copy will be used by Jekyll instead on the standard one, and you can modify it to suit your needs.
 
-Now, the local copy of the file will be used by Jekyll instead on the online one. So, I can modify it as it suits me better.
+Now, create the `tutorials/index.md` file. This will be the starting page when someone reaches the `<username>.github.io/tutorials` url.
 
 {% endraw %}
