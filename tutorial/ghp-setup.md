@@ -126,8 +126,23 @@ layout: default
 ---
 ```
 
-By specifying the layout, Jekyll will replace the ```{{ content }}``` tag in the `_layouts\default.html` file provided by the theme with the actual content of the file (which is empty, for now).
+The snippet above is called a ```YAML FrontMatter```and it is used to specify configurations and variables.  By specifying the `layout`, Jekyll will replace the ```{{ content }}``` tag in the `_layouts\default.html` file provided by the theme with the actual content of the file (which is empty, for now).
 
 Commit and push your updates and refresh the page. If everything is fine, you should get an empty page with the new graphics.
+
+Now, let's do another step. We don't want to specify the layout for every single page in our site, so let's move it into the `_config.yml` file as a default choice. Add the following line at the end of your `_config.yml` file:
+
+```
+# Setting defaults configurations
+defaults:
+  -
+    scope:
+      path: "" # apply this default to all files in the project
+      type: ["pages", "posts"] # apply only to pages and posts
+    values:
+      layout: "dafault"
+```
+
+Now remove the FrontMatter in `index.html`, since it was defined into the `_config.yml`, and add some text to see the changes. Commit and push your updates to see if it works.
 
 {% endraw %}
