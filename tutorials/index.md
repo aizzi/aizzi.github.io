@@ -1,7 +1,7 @@
 ---
 ---
-# Tutorials test 4
+# Tutorials test 5
 
 {% for tutorial in site.tutorials %}
-  <p>{{ tutorial.url }}
+  <p>{{ tutorial.url }}</p>
 {% endfor %}
