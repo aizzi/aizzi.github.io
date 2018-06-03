@@ -1,3 +1,4 @@
+{% raw %}
 # Publishing your website on GitHub pages
 
 1. [Activate GitHub Pages](activate-github-pages)
@@ -128,3 +129,5 @@ layout: default
 By specifying the layout, Jekyll will replace the ```{{ content }}``` tag in the `_layouts\default.html` file provided by the theme with the actual content of the file (which is empty, for now).
 
 Commit and push your updates and refresh the page. If everything is fine, you should get an empty page with the new graphics.
+
+{% endraw %}
