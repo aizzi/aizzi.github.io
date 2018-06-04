@@ -1,9 +1,9 @@
 ---
 title: "Tutorials"
 ---
-# Tutorials test 13
+# Tutorials test 14
 
-<p>type: {{ page.type }}</p>
+<p>type: {{ page.collection }}</p>
 {% for tutorial in site.tutorials %}
   <p>{{ tutorial.url }}</p>
 {% endfor %}
