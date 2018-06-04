@@ -1,7 +1,7 @@
 ---
-type: tutorials
+type: "tutorials"
 ---
-# Tutorials test 16
+# Tutorials test 17
 
 <p>collection: {{ page.collection }}</p>
 <p>type: {{ page.type }}</p>
