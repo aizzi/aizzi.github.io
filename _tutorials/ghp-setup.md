@@ -1,5 +1,4 @@
 ---
-title: "Publishing your website on GitHub Pages"
 ---
 {% raw %}
 # Publishing your website on GitHub pages
