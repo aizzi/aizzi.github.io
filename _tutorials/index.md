@@ -1,8 +1,8 @@
 ---
 ---
-# Tutorials test 10
+# Tutorials test 11
 
-<p>{{ page.type }}</p>
+<p>type: {{ page.type }}</p>
 {% for tutorial in site.tutorials %}
   <p>{{ tutorial.url }}</p>
 {% endfor %}
