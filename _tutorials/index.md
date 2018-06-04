@@ -1,7 +1,7 @@
 ---
-title: "Tutorials"
+type: tutorials
 ---
-# Tutorials test 14
+# Tutorials test 15
 
 <p>type: {{ page.collection }}</p>
 {% for tutorial in site.tutorials %}
