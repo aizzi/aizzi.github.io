@@ -1,7 +1,8 @@
 ---
 type: "tutorials"
+layout: "default"
 ---
-# Tutorials test 17
+# Tutorials test 18
 
 <p>collection: {{ page.collection }}</p>
 <p>type: {{ page.type }}</p>
