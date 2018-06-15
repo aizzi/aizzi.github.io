@@ -1,9 +1,9 @@
 ---
 ---
-# Tutorials test 41
+# Tutorials test 42
 
 {% for tutorial in site.tutorials %}
-  {% unless tutorial.title == "Index" %}
+  {% if tutorial.title != 'Index' %}
     <div>
       <h2>
         <a href="{{ tutorial.url }}">{{ tutorial.title }}</a>
@@ -19,5 +19,5 @@
         </small>
       </div>
     </blockquote>
-  {% endunless %}
+  {% endif %}
 {% endfor %}
