@@ -1,9 +1,8 @@
 ---
 ---
-# Tutorials test 44
+# Tutorials test 45
 
 {% for tutorial in site.tutorials %}
-  {% if true %}
     <div>
       <h2>
         <a href="{{ tutorial.url }}">{{ tutorial.title }}</a>
@@ -19,5 +18,4 @@
         </small>
       </div>
     </blockquote>
-  {% endif %}
 {% endfor %}
