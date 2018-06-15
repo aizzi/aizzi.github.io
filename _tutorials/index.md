@@ -1,9 +1,9 @@
 ---
 ---
-# Tutorials test 40
+# Tutorials test 41
 
 {% for tutorial in site.tutorials %}
-  {% unless tutorial.title == 'Index' %}
+  {% unless tutorial.title == "Index" %}
     <div>
       <h2>
         <a href="{{ tutorial.url }}">{{ tutorial.title }}</a>
