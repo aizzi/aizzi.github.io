@@ -1,9 +1,9 @@
 ---
 ---
-# Tutorials test 53
+# Tutorials test 54
 
 <p>
-  {{ site.tutorials.documents }}
+  {{ site.tutorials.docs }}
 </p>
 
 {% for tutorial in site.tutorials %}
