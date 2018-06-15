@@ -82,7 +82,7 @@ Although [Jekyll](https://jekyllrb.com) will scan through all your repository, s
 * `_config.yml` : a configuration file for Jekyll features, accurately described [here](https://jekyllrb.com/docs/configuration/)
 * `_data` : it will contains all data used throughout your site. Any files stored in this directory can be accessed via a `site.data` variable.
 * `_drafts` : this directory will contain all the drafts of your articles
-* `_includes` : this directory contains files that can be included in other files in your site using the liquid tag ```{% include file.ext %}```
+* `_includes` : this directory contains files that can be included in other files in your site using the liquid tag ```{% raw %}{% include file.ext %}{% endraw %}```
 * `_layouts` : this directory contains the template used to render your web pages. Providing the right [YAML FrontMatter](https://jekyllrb.com/docs/frontmatter/) in a file, you can insert the content of the file in the choosen template by using the tag ```{% raw %}{{ content }}{% endraw %}```
 * `_posts` : this directory contains your blog articles, using the naming convention `yyyy-mm-dd-title-of-the-article.md`
 * `_sass` : this directory contains the [sass](https://sass-lang.com/) files used throughout your website
