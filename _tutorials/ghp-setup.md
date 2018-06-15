@@ -1,7 +1,5 @@
 ---
 ---
-{% raw %}
-
 # Publishing your website on GitHub pages
 
 1. [Activate GitHub Pages](activate-github-pages)
@@ -85,7 +83,7 @@ Although [Jekyll](https://jekyllrb.com) will scan through all your repository, s
 * `_data` : it will contains all data used throughout your site. Any files stored in this directory can be accessed via a `site.data` variable.
 * `_drafts` : this directory will contain all the drafts of your articles
 * `_includes` : this directory contains files that can be included in other files in your site using the liquid tag ```{% include file.ext %}```
-* `_layouts` : this directory contains the template used to render your web pages. Providing the right [YAML FrontMatter](https://jekyllrb.com/docs/frontmatter/) in a file, you can insert the content of the file in the choosen template by using the tag ```{{ content }}```
+* `_layouts` : this directory contains the template used to render your web pages. Providing the right [YAML FrontMatter](https://jekyllrb.com/docs/frontmatter/) in a file, you can insert the content of the file in the choosen template by using the tag ```{% raw %}{{ content }}{% endraw %}```
 * `_posts` : this directory contains your blog articles, using the naming convention `yyyy-mm-dd-title-of-the-article.md`
 * `_sass` : this directory contains the [sass](https://sass-lang.com/) files used throughout your website
 * `index.html` : the index page of your site (we already created it).
@@ -131,7 +129,7 @@ layout: default
 ---
 ```
 
-The snippet above is called a ```YAML FrontMatter```and it is used to specify configurations and variables.  By specifying the `layout`, Jekyll will replace the ```{{ content }}``` tag in the `_layouts\default.html` file provided by the theme with the actual content of the file (which is empty, for now).
+The snippet above is called a ```YAML FrontMatter```and it is used to specify configurations and variables.  By specifying the `layout`, Jekyll will replace the ```{% raw %}{{ content }}{% endraw %}``` tag in the `_layouts\default.html` file provided by the theme with the actual content of the file (which is empty, for now).
 
 Commit and push your updates and refresh the page. If everything is fine, you should get an empty page with the new graphics.
 
@@ -193,11 +191,11 @@ collections:
 Then, edit the `_tutorials/index.md` and insert the following:
 
 ```
+{% raw %}
 # Tutorials
 
 {% for tutorial in site.tutorials %}
   <p>{{ tutorial.url }}</p>
 {% endfor %}
-```
-
 {% endraw %}
+```
