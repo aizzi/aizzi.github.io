@@ -180,7 +180,7 @@ I decided that I'd like to have a specific type of content that I will call *tut
 
 Start by creating the `_tutorials/index.md` file. This will be the starting page when someone reaches the `<username>.github.io/tutorials` url.
 
-Then, define the collection into the `_config.yml` file:
+Now we need to define the collection into the `_config.yml` file:
 
 ```
 # collections
