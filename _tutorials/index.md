@@ -1,9 +1,9 @@
 ---
 ---
-# Tutorials test 58
+# Tutorials test 59
 
 <p>
-  {{ site.docs | join: ", " }}
+  {{ site.tutorials.docs | join: ", " }}
 </p>
 
 {% for tutorial in site.tutorials %}
