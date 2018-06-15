@@ -1,6 +1,9 @@
 ---
+title: "How to publish your website on GitHub Pages"
+description: "Describe the steps I performed in order to create this website"
+last_update: "June 15th, 2018"
 ---
-# Publishing your website on GitHub pages
+# How to publish your website on GitHub Pages
 
 1. [Activate GitHub Pages](activate-github-pages)
 2. [Configuring the website](configuring-the-website)
@@ -187,7 +190,20 @@ collections:
     output: true
 ```
 
-I want this page to be an index for all my tutorials. This means that I want to list here all the content of the collection. This can be done programmatically by editing the `_tutorials/index.md` and inserting the following code:
+I want this page to be an index for all my tutorials. This means that I want to list here all the content of the collection. This can be done programmatically by editing the `_tutorials/index.md` and inserting the appropriate code.
+
+For each tutorial, I want presented on this page the following information:
+a title, a short description, the date of last update.
+
+To do so, each tutorial will have the following frontmatter:
+
+```
+---
+title: "the title of the tutorial"
+description: "the description of its content"
+last_update: "last update date"
+---
+```
 
 ```
 {% raw %}
