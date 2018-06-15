@@ -1,9 +1,9 @@
 ---
 ---
-# Tutorials test 64
+# Tutorials test 65
 
 <p>
-  {% assign tutorials_list = site.tutorials | sort:"meta.last_update" | reverse %}
+  {% assign tutorials_list = site.tutorials | sort:"last_update" | reverse %}
 </p>
 
 {% for tutorial in tutorials_list %}
