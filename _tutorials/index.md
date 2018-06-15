@@ -1,23 +1,23 @@
 ---
 ---
-# Tutorials test 47
+# Tutorials test 48
 
 {% for tutorial in site.tutorials %}
-{% if tutorial.title != 'Index' %}
-  <div>
-    <h2>
-      <a href="{{ tutorial.url }}">{{ tutorial.title }}</a>
-    </h2>
-  </div>
-  <blockquote>
+  {% if tutorial.title != 'Index' %}
     <div>
-      {{ tutorial.description }}
+      <h2>
+        <a href="{{ tutorial.url }}">{{ tutorial.title }}</a>
+      </h2>
     </div>
-    <div>
-      <small>
-        <i>Last updated: {{ tutorial.last_update }}</i>
-      </small>
-    </div>
-  </blockquote>
-{% endif %}
+    <blockquote>
+      <div>
+        {{ tutorial.description }}
+      </div>
+      <div>
+        <small>
+          <i>Last updated: {{ tutorial.last_update }}</i>
+        </small>
+      </div>
+    </blockquote>
+  {% endif %}
 {% endfor %}
