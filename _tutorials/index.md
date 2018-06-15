@@ -1,6 +1,10 @@
 ---
 ---
-# Tutorials test 51
+# Tutorials test 52
+
+<p>
+  {{ site.tutorials }}
+</p>
 
 {% for tutorial in site.tutorials %}
 {% if tutorial.title != 'Index' %}
