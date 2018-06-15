@@ -1,9 +1,6 @@
 ---
-title: "index"
-description: ""
-last_update: "June 15th, 2018"
 ---
-# Tutorials test 37
+# Tutorials test 38
 
 {% for tutorial in site.tutorials %}
     <div><h2><a href="{{ tutorial.url }}">{{ tutorial.title }}</a></h2></div>
