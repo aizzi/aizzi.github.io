@@ -1,21 +1,23 @@
 ---
 ---
-# Tutorials test 39
+# Tutorials test 40
 
 {% for tutorial in site.tutorials %}
-  <div>
-    <h2>
-      <a href="{{ tutorial.url }}">{{ tutorial.title }}</a>
-    </h2>
-  </div>
-  <blockquote>
+  {% unless tutorial.title == 'Index' %}
     <div>
-      {{ tutorial.description }}
+      <h2>
+        <a href="{{ tutorial.url }}">{{ tutorial.title }}</a>
+      </h2>
     </div>
-    <div>
-      <small>
-        <i>Last updated: {{ tutorial.last_update }}</i>
-      </small>
-    </div>
-  </blockquote>
+    <blockquote>
+      <div>
+        {{ tutorial.description }}
+      </div>
+      <div>
+        <small>
+          <i>Last updated: {{ tutorial.last_update }}</i>
+        </small>
+      </div>
+    </blockquote>
+  {% endunless %}
 {% endfor %}
