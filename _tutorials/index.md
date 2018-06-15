@@ -1,12 +1,13 @@
 ---
 ---
-# Tutorials test 59
+# Tutorials test 60
 
 <p>
-  {{ site.tutorials.docs | join: ", " }}
+  {% assign tutorials_list = site.tutorials | sort:"last_update" | reverse %}
 </p>
 
-{% for tutorial in site.tutorials %}
+{% comment %}{% for tutorial in site.tutorials %}{% endomment %}
+{% for tutorial in tutorials_list %}
 {% if tutorial.title != 'Index' %}
   <div>
     <h2>
