@@ -141,7 +141,6 @@ defaults:
   -
     scope:
       path: "" # apply this default to all files in the project
-      type: ["pages", "posts", "tutorials"] # apply only to pages and posts
     values:
       layout: "default"
 ```
@@ -188,7 +187,7 @@ collections:
     output: true
 ```
 
-Then, edit the `_tutorials/index.md` and insert the following:
+I want this page to be an index for all my tutorials. This means that I want to list here all the content of the collection. This can be done programmatically by editing the `_tutorials/index.md` and inserting the following code:
 
 ```
 {% raw %}

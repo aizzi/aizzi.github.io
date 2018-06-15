@@ -1,9 +1,7 @@
 ---
 ---
-# Tutorials test 27
+# Tutorials test 28
 
-<p>collection: {{ page.collection }}</p>
-<p>type: {{ page.type }}</p>
 {% for tutorial in site.tutorials %}
-  <p>{{ tutorial.url }}</p>
+  <a href="{{ tutorial.url }}">{{ tutorial.title }}</a>
 {% endfor %}
