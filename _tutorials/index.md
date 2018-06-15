@@ -1,10 +1,10 @@
 ---
 ---
-# Tutorials test 29
+# Tutorials test 30
 
 {% for tutorial in site.tutorials %}
-  <p><a href="{{ tutorial.url }}">{{ tutorial.title }}</a></p>
-  <p>{{ tutorial.description }}</p>
-  <p>{{ tutorial.last_update }}</p>
+  <div><a href="{{ tutorial.url }}">{{ tutorial.title }}</a></div>
+  <div>>{{ tutorial.description }}</div>
+  <div>Last updated: {{ tutorial.last_update }}</div>
   <p></p>
 {% endfor %}
