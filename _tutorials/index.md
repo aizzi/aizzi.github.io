@@ -1,10 +1,9 @@
 ---
 ---
-# Tutorials test 56
+# Tutorials test 57
 
 <p>
-  {% assign tutorial_docs = site.tutorials.docs %}
-  {{ tutorial_docs }}
+  {{ site.tutorials | join: ", " }}
 </p>
 
 {% for tutorial in site.tutorials %}
