@@ -1,9 +1,9 @@
 ---
 ---
-# Tutorials test 34
+# Tutorials test 35
 
 {% for tutorial in site.tutorials %}
-  {{ tutorial.name }}
+  <p>name: {{ tutorial.name }}</p>
   <div><h2><a href="{{ tutorial.url }}">{{ tutorial.title }}</a></h2></div>
   <blockquote>
     <div>{{ tutorial.description }}</div>
