@@ -15,5 +15,6 @@ defaults:
   -
     scope:
       path: "" # apply this default to all files in the project
+      type: ["pages", "posts", "tutorials"]
     values:
       layout: "default"

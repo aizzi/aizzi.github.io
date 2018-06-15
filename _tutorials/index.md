@@ -1,6 +1,6 @@
 ---
 ---
-# Tutorials test 25
+# Tutorials test 26
 
 <p>collection: {{ page.collection }}</p>
 <p>type: {{ page.type }}</p>
