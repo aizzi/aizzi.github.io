@@ -1,9 +1,10 @@
 ---
 ---
-# Tutorials test 54
+# Tutorials test 55
 
 <p>
-  {{ site.tutorials.docs }}
+  {% assign tutorial_docs = site.tutorials %}
+  {{ tutorial_docs }}
 </p>
 
 {% for tutorial in site.tutorials %}
