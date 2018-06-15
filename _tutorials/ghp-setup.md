@@ -4,7 +4,7 @@ description: "In this tutorial I describe all the steps I performed in order to 
 last_update: "2018-06-15"
 ---
 # How to publish your website on GitHub Pages
-###### Last Updated: {{ page.last_update }}
+###### Last Updated: {{ page.last_update | date: "%a, %B %d, %Y" }}
 
 1. [Activate GitHub Pages](#activate-github-pages)
 2. [Configuring the website](#configuring-the-website)
