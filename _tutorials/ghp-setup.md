@@ -235,3 +235,5 @@ Iterate through the list of tutorials, and build the index
 {% endif %}
 {% endfor %}
 ```
+
+If you want to work on an article, but do not want it published, you can do that by using `published: false` into the front-matter section.

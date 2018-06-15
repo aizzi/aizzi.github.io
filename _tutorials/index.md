@@ -1,6 +1,6 @@
 ---
 ---
-# Tutorials 69
+# Tutorials
 
 <!---
 Sort the tutorials in reverse order by last_update variable, so that last updated will be on-top of the page
