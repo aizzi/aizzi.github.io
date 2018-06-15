@@ -1,6 +1,6 @@
 ---
 title: "How to publish your website on GitHub Pages"
-description: "Describe the steps I performed in order to create this website"
+description: "In this tutorial I describe all the steps I performed in order to publish this very same site on GitHub Pages. It was a trial and error process, as usual, and I learned a lot about templating from it. I hope it will help you to set up your own website."
 last_update: "June 15th, 2018"
 ---
 # How to publish your website on GitHub Pages
@@ -11,7 +11,6 @@ last_update: "June 15th, 2018"
 4. [Customize the Layout](customize-the-layout)
 5. [Define a Collection](define-a-collection)
 
---
 ## Activate GitHub Pages
 
 If you want to build a website, sooner or later you need a way to test it and verify that users will be presented with what you intended to. In order to do so, you need a webserver.
@@ -78,7 +77,6 @@ This tutorial is mostly the documentation of how this very site was developed fr
 
 I will proceed by steps, building one feature after the other, solving problems as they present themselves and documenting all the steps and the choices I make. I have some HTML and CSS knowledge, as well as some programming skills, but it has been a while since I used them and lot of things did change over time. This means that sometimes I will come back to change something because I find a better way to do it, or because I simply changed my mind. All those changes will be documented here.
 
---
 ## Configuring the website
 Although [Jekyll](https://jekyllrb.com) will scan through all your repository, some directories and files have a special meaning to it. Jekyll's directory structure is described [here](https://jekyllrb.com/docs/structure/). I will not repeat what's already described in the documentation, but summarizing it in a Jekyll enabled site you will find the following:
 
@@ -103,7 +101,6 @@ show_drafts: FALSE
 future: FALSE
 ```
 
---
 ## Site Layout
 
 At this point, we have a very simple, old style static web site. If you know CSS and HTML, you can start working on the front-end, customizing the layout as you like. But what if you don't know CSS and/or don't want to invest time in working on the site layout? Maybe you, like me, are more interested in using the site to store your notes, projects, posts and tutorials.
@@ -161,7 +158,6 @@ title: "Tetriminos"
 description: "Filling (my) life with pieces of knowledge"
 ```
 
---
 ## Customize the Layout
 
 At this point, you should have a working page you can reach at the url '<username>.github.io', that will show you the content of the `index.md` file in your root directory.
@@ -174,7 +170,6 @@ Unfortunately, the standard layout provided does not allow for this out-of-the-b
 
 Create a `_layouts/default.html` file in your site, and copy in it the content of the `_layouts/default.html` file of the chosen theme. Now, the local copy will be used by Jekyll instead on the standard one, and you can modify it to suit your needs.
 
---
 ## Define a Collection
 
 I decided that I'd like to have a specific type of content that I will call *tutorials*. Tutorials are one-page articles, containing a step-by-step guide about a specific issue. These files will be stored in a specific directory called `_tutorials`, and will be defined as a specific [Collection](https://jekyllrb.com/docs/collections/).
@@ -205,12 +200,4 @@ last_update: "last update date"
 ---
 ```
 
-```
-{% raw %}
-# Tutorials
-
-{% for tutorial in site.tutorials %}
-  <p>{{ tutorial.url }}</p>
-{% endfor %}
-{% endraw %}
-```
+Furthermore,
