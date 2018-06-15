@@ -197,3 +197,41 @@ description: "the description of its content"
 last_update: "last update date"
 ---
 ```
+
+The `last_update` variable will be used to sort the list of articles in reverse order, so that the last updated will be presented on top of page.
+
+The code to generate the index is contained into `index.md` page, which is loaded when I it the `tutorials` page on the site.
+
+```
+---
+---
+# Tutorials
+
+<!---
+Sort the tutorials in reverse order by last_update variable, so that last updated will be on-top of the page
+-->
+{% assign tutorials_list = site.tutorials | sort:"last_update" | reverse %}
+
+<!--
+Iterate through the list of tutorials, and build the index
+-->
+{% for tutorial in tutorials_list %}
+{% if tutorial.title != 'Index' %}
+  <div>
+    <h2>
+      <a href="{{ tutorial.url }}">{{ tutorial.title }}</a>
+    </h2>
+  </div>
+  <blockquote>
+    <div>
+      {{ tutorial.description }}
+    </div>
+    <div>
+      <small>
+        <i>Last updated: {{ tutorial.last_update }}</i>
+      </small>
+    </div>
+  </blockquote>
+{% endif %}
+{% endfor %}
+```

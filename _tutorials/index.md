@@ -1,13 +1,15 @@
 ---
 ---
-# Tutorials test 66
+# Tutorials 67
 
-<!--- comment -->
+<!---
+Sort the tutorials in reverse order by last_update variable, so that last updated will be on-top of the page
+-->
+{% assign tutorials_list = site.tutorials | sort:"last_update" | reverse %}
 
-<p>
-  {% assign tutorials_list = site.tutorials | sort:"last_update" | reverse %}
-</p>
-
+<!--
+Iterate through the list of tutorials, and build the index
+-->
 {% for tutorial in tutorials_list %}
 {% if tutorial.title != 'Index' %}
   <div>
