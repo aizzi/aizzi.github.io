@@ -36,7 +36,7 @@ In order to create your GitHub Pages user site, you must create a new repository
 
 So, go on and create it.
 
-![create aizzi.github.io](/assets/img/ghp-setup-img02.png)
+![create aizzi.github.io](/assets/img/ghp-setup_img02.png)
 
 Once it is created, create the index page of your site `index.html` and copy the following text in it (changing my name with your one):
 
