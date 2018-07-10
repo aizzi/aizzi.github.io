@@ -116,7 +116,7 @@ Now, let's modify our site to use the theme.
 
 First of all customize the `_config.yml` file to enable the new theme by adding the following line:
 
-```
+```YAML
 theme: jekyll-theme-architect
 ```
 
@@ -124,7 +124,7 @@ Read the documentation of the theme you choose in order to understand what to ad
 
 Then, modify the `index.html` file to use the layout:
 
-```
+```YAML
 ---
 layout: default
 ---
@@ -136,7 +136,7 @@ Commit and push your updates and refresh the page. If everything is fine, you sh
 
 Now, let's do another step. We don't want to specify the layout for every single page in our site, so let's move it into the `_config.yml` file as a default choice. Add the following line at the end of your `_config.yml` file:
 
-```
+```YAML
 # Setting defaults configurations
 defaults:
   -
@@ -154,7 +154,7 @@ Now:
 
 Finally, as the last step of this phase, let's customize the Title and the description of the site. The chosen theme supports two general configuration variables for that: `title` and `description`. Let's add those into the `_config.yaml` file to set the corresponding values in the page header.
 
-```
+```YAML
 title: "Tetriminos"
 description: "Filling (my) life with pieces of knowledge"
 ```
@@ -179,7 +179,7 @@ Start by creating the `_tutorials/index.md` file. This will be the starting page
 
 Now we need to define the collection into the `_config.yml` file:
 
-```
+```YAML
 # collections
 collections:
   tutorials:
@@ -191,7 +191,7 @@ I want this page to be an index for all my tutorials. This means that I want to 
 For each tutorial, I want presented on this page the following information:
 a title, a short description, the date of last update. In order to do so, each tutorial will have the following frontmatter:
 
-```
+```YAML
 ---
 title: "the title of the tutorial"
 description: "the description of its content"
@@ -203,7 +203,7 @@ The `last_update` variable will be used to sort the list of articles in reverse 
 
 The code to generate the index is contained into `index.md` page, which is loaded when I it the `tutorials` page on the site.
 
-```
+```HTML
 ---
 ---
 # Tutorials
