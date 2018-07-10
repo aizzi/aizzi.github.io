@@ -11,7 +11,6 @@ last_update: "2018-06-15"
 3. [Site Layout](#site-layout)
 4. [Customize the Layout](#customize-the-layout)
 5. [Define a Collection](#define-a-collection)
-6. [Using Includes](#using-includes)
 
 ## Activate GitHub Pages
 
@@ -239,5 +238,3 @@ Iterate through the list of tutorials, and build the index
 ```
 
 If you want to work on an article, but do not want it published, you can do that by using `published: false` into the front-matter section.
-
-## Using Includes
