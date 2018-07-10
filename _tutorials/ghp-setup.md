@@ -11,6 +11,7 @@ last_update: "2018-06-15"
 3. [Site Layout](#site-layout)
 4. [Customize the Layout](#customize-the-layout)
 5. [Define a Collection](#define-a-collection)
+6. [Using Includes](#using-includes)
 
 ## Activate GitHub Pages
 
@@ -36,7 +37,7 @@ In order to create your GitHub Pages user site, you must create a new repository
 
 So, go on and create it.
 
-![create aizzi.github.io](/assets/img/ghp_setup-img02.png)
+![create aizzi.github.io](/assets/img/ghp-setup-img02.png)
 
 Once it is created, create the index page of your site `index.html` and copy the following text in it (changing my name with your one):
 
@@ -96,7 +97,7 @@ Now, let's open the newly created `_config.yml` file and make some general confi
 
 > Note: these are the configuration I made to this website. They are reported here for documentation. You can make your own. Read the documentation and decide what you want to do with your site!
 
-```
+```YAML
 timezone: Europe/Prague
 show_drafts: FALSE
 future: FALSE
@@ -238,3 +239,5 @@ Iterate through the list of tutorials, and build the index
 ```
 
 If you want to work on an article, but do not want it published, you can do that by using `published: false` into the front-matter section.
+
+## Using Includes
