@@ -1,7 +1,7 @@
 ---
 title: "How to publish your website on GitHub Pages"
 description: "In this tutorial I describe all the steps I performed in order to publish this very same site on GitHub Pages. It was a trial and error process, as usual, and I learned a lot about templating from it. I hope it will help you to set up your own website."
-last_update: "2018-06-15"
+last_update: "2018-07-10"
 ---
 # How to publish your website on GitHub Pages
 ###### Last Updated: {{ page.last_update | date: "%A, %B %d, %Y" }}
