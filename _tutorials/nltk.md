@@ -9,13 +9,14 @@ last_update: "2018-10-01"
 This is a collection of notes I took while studying the [Natural Language Processing with Python](http://www.nltk.org/book/) book.
 
 1. [Glossary](#glossary)
-2. [Language Processing and Python](#language_processing_and_python)
-3. [Accessing Text Corpora and Lexical Resources](#accessing_text_corpora_and_lexical_resources)
-4. [Further Readings and resources](#further_readings_and_resources)
+2. [Language Processing and Python](#language-processing-and-python)
+3. [Accessing Text Corpora and Lexical Resources](#accessing-text-corpora-and-lexical-resources)
+4. [Further Readings and resources](#further-readings-and-resources)
 
 ## Glossary
+
 | Term | Description | Example |
-|===|===|===|
+| === | === | === |
 | Concordance | Shows every occurence of a given word, together with some context | `text1.concordance("monstrous")` |
 | Similarity | Shows us what other words appear in a similar range of context of a given word | `text1.similar("monstrous")` |
 | Common Context | Examine just the contexts that are shared by two or more words | text1.common_contexts(["monstrous", "very"]) |
@@ -34,12 +35,13 @@ This is a collection of notes I took while studying the [Natural Language Proces
 
 ### Simple text statistics
 
-1) Get a frequency distribution using `FreqDist(text)`
-2) Get the x most common types by using `fdist1.most_common(x)`
-3) Get the infrequent words by using `fdist1.hapaxes()`
-4) Search for long words used more often in order to characterize a text
+1. Get a frequency distribution using `FreqDist(text)`
+2. Get the x most common types by using `fdist1.most_common(x)`
+3. Get the infrequent words by using `fdist1.hapaxes()`
+4. Search for long words used more often in order to characterize a text
 
 ### Functions define for Frequency distribution
+
 | Example | Description |
 | === | === |
 | fdist = FreqDist(samples) | create a frequency distribution containing the given samples |
@@ -56,6 +58,7 @@ This is a collection of notes I took while studying the [Natural Language Proces
 | fdist1 < fdist2 | test if samples in fdist1 occur less frequently than in fdist2 |
 
 ### Some Word Comparison Operators
+
 | Function | Meaning |
 | === | === |
 | s.startswith(t) | test if s starts with t |
