@@ -13,7 +13,7 @@ This is a collection of notes I took while studying the [Natural Language Proces
 3. [Accessing Text Corpora and Lexical Resources](#accessing-text-corpora-and-lexical-resources)
 4. [Further Readings and resources](#further-readings-and-resources)
 
-## Glossary
+## 1 - Glossary
 
 | Term | Description | Example |
 | === | === | === |
@@ -30,17 +30,19 @@ This is a collection of notes I took while studying the [Natural Language Proces
 | Word Sense Disambiguation | work out which sense of a word was intended in a given context |
 | anaphora resolution | identifying what a pronoun or noun phrase refers to |
 | semantic role labeling | identifying how a noun phrase relates to the verb (as agent, patient, instrument, and so on) |
+| Conditional Frequency Distributions | A collection of frequency distributions, each of one for a different "condition" |
+| Lexicon | A lexicon (or lexical resource), is a collection of words and/or phrases along with associated information such as part of speech and sense definitions. |
 
-## Language Processing and Python
+## 2 - Language Processing and Python
 
-### Simple text statistics
+### 2.1 - Simple text statistics
 
 1. Get a frequency distribution using `FreqDist(text)`
 2. Get the x most common types by using `fdist1.most_common(x)`
 3. Get the infrequent words by using `fdist1.hapaxes()`
 4. Search for long words used more often in order to characterize a text
 
-### Functions define for Frequency distribution
+### 2.2 - Functions define for Frequency distribution
 
 | Example | Description |
 | === | === |
@@ -57,7 +59,7 @@ This is a collection of notes I took while studying the [Natural Language Proces
 | fdist1 \|= fdist2 | update fdist1 with counts from fdist2 |
 | fdist1 < fdist2 | test if samples in fdist1 occur less frequently than in fdist2 |
 
-### Some Word Comparison Operators
+### 2.3 - Some Word Comparison Operators
 
 | Function | Meaning |
 | === | === |
@@ -71,11 +73,52 @@ This is a collection of notes I took while studying the [Natural Language Proces
 | s.isdigit() | test if s is non-empty and all characters in s are digits |
 | s.istitle() | test if s contains cased characters and is titlecased (i.e. all words in s have initial capitals) |
 
-## Accessing Text Corpora and Lexical resources
+## 3 - Accessing Text Corpora and Lexical resources
 
+### Accessing Text Corpora
+Corpora available in NTLK are described in the table below
 
-## Further Readings and resources
+| Corpus | Description | Example |
+| === | === | === |
+| gutenberg | Small selection of texts from [Project Gutenberg](http://www.gutenberg.org) | from nltk.corpus import gutenberg |
+| Web and Chat Text | Content from a Firefox discussion forum, conversations overheard in New York, the movie script of *Pirates of the Carribean*, personal advertisements, and wine review | from nltk.corpus import webtext |
+| NPS Chat | Instant messagin chat sessions, collected by the Naval Postgraduate School for research on automatic detection of Internet predators | from nltk.corpus import nps_chat |
+| Brown Corpus | The first million-word electronic corpus of English, created in 1961 at Brown University (http://icame.uib.no/brown/bcm-los.html) | from nltk.corpus import brown |
+| Routers | contains 10.788 news documents totaling 1.3 million words, classified into 90 topics and grouped into two sets (*training* and *test*) | from nltk.corpus import reuters |
+| Inaugural Address Corpus | A collection of 55 texts, one for each presidential address | from nltk.corpus import inaugural |
+| Annotated Text Corpora | Many text corpora containing linguist annotations | see http://nltk.org/data |
+
+In the following table some functions than can be used with these corpora:
+
+| Command | Description | Example |
+| === | === | === |
+| from nltk.corpus import gutenberg | Import the corpora as a `gutenberg` object | |
+| gutenberg.fileids() | return a list of all the file identifiers in the corpus | |
+| gutenberg.words(<file_id>) | return the corpus associated with the specific fileid | emma = gutenberg.words('austen-emma.txt') |
+| gutenberg.raw(fileid) | return the "raw" text of the book, not split up into tokens. | gutenberg.raw('austen-emma.txt') |
+| gutenbers.sents(fileid) | divides the text up into its sentences, where each sentence is a list of words | gutenberg.sents('austen-emma.txt') |
+
+On these corpora we can of course use all the functions we explored in the chapter 1 (e.g. `concordance`, `similarity`, `common_context`, etc.).
+
+### Conditional Frequency distributions
+Commonly-used methods and idioms for defining, accessing and visualizing a conditional distribution of counters:
+
+| Example | Description |
+| === | === |
+| cfdist = ConditionalFreqDist(pairs) | create a conditional frequency distribution from a list of pairs |
+| cfdist.conditions() | the conditions |
+| cfdist[condition] | the frequency distribution for this condition |
+| cfdist[condition][sample] | frequency for the given sample for this condition |
+| cfdist.tabulate() | tabulate the conditional frequency distribution |
+| cfdist.tabulate(samples, conditions) | tabulation limited to the specified samples and conditions |
+| cfdist.plot() | graphical plot of the conditional frequency distribution |
+| cfdist.plot(samples, conditions) | graphical plot limited to the specified samples and conditions |
+| cfdist1 < cfdist2 | test if samples in cfdist1 occur less frequently than in cfdist2 |
+
+## 4 - Further Readings and resources
 1. Indurkhya, Nitin and Fred Damerau (eds, 2010) *Handbook of Natural Language Processing (Second Edition)* Chapman & Hall/CRC. 2010.
 2. Jurafsky, Daniel and James Martin (2008) *Speech and Language Processing (Second Edition)*
 3. Mitkov, Ruslan (ed, 2003) *The Oxford Handbook of Computational Linguistics*. Oxford University Press. (second edition expected in 2010)
-4. [he Association for Computational Linguistics](http://www.aclweb.org/)
+4. [The Association for Computational Linguistics](http://www.aclweb.org/)
+5. Edward Finegan *Language: Its Structure and Use*
+6. William O'Grady, John Archibald, Mark Aronoff, and Janie Rees-Miller. *Contemporary Linguistics: An Introduction*. St. Martin's Press, 5 edition, 2004.
