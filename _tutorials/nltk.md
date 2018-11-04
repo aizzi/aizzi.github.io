@@ -2,6 +2,7 @@
 title: "Notes on learning NLTK"
 description: "In this tutorial I collected a bunch of notes I used during the study of the book *Natural Language Processing with Python*"
 last_update: "2018-10-01"
+published: false
 ---
 # Notes on Learning NLTK
 ###### Last Updated: {{ page.last_update | date: "%A, %B %d, %Y" }}
