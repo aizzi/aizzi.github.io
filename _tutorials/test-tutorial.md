@@ -6,5 +6,6 @@ published: false
 ---
 
 # Test Tutorials
+###### Last Updated: {{ page.last_update | date: "%A, %B %d, %Y" }}
 
 This is a dummy article
