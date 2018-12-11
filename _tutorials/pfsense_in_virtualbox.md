@@ -211,14 +211,14 @@ In case you were wondering: this is the reason why we **did not connect the cabl
 
 So, back to the `pfSense` console:
 
-1) select option `2) Set interface(s) IP address`
-2) select option `2 - LAN (em1 - static)`
-3) enter the new LAN IPv4 address: `10.0.0.1`
-4) enter the new LAN IPv4 subnet bit count: `24`
-5) press `ENTER` to complete the procedure
-6) skip all the IPv6 address configuration (we are not using IPv6 here)
-7) answer `n` to the request to enable the DHCP server on LAN
-8) answer `n` to the request to revert to HTTP for the webConfigurator protocol
+1. select option `2) Set interface(s) IP address`
+2. select option `2 - LAN (em1 - static)`
+3. enter the new LAN IPv4 address: `10.0.0.1`
+4. enter the new LAN IPv4 subnet bit count: `24`
+5. press `ENTER` to complete the procedure
+6. skip all the IPv6 address configuration (we are not using IPv6 here)
+7. answer `n` to the request to enable the DHCP server on LAN
+8. answer `n` to the request to revert to HTTP for the webConfigurator protocol
 
 You should now see the following:
 
@@ -279,15 +279,15 @@ Now, your Wi-Fi Status should show you as `Enabled` but `Not Connected`
 
 We are now ready to configure the WAN interface in the `pfSense` VM:
 
-1) Restart the VM
-2) In the `pfSense` console, select `2) Set interface(s) IP address`
-3) Select `WAN (em0 - dhcp, dhcp6)`
-4) Answer `n` to the question to use DHCP
-5) Enter the new WAN IP address. According to our schema, this should be `192.168.1.3`
-6) Enter the subnet mask `24`
-7) Enter the WAN IPv4 upstream gateway address `192.168.1.1`
-8) Do not configure IPv6
-9) Do not revert to HTTP as the `webConfigurator` protocol
+1. Restart the VM
+2. In the `pfSense` console, select `2) Set interface(s) IP address`
+3. Select `WAN (em0 - dhcp, dhcp6)`
+4. Answer `n` to the question to use DHCP
+5. Enter the new WAN IP address. According to our schema, this should be `192.168.1.3`
+6. Enter the subnet mask `24`
+7. Enter the WAN IPv4 upstream gateway address `192.168.1.1`
+8. Do not configure IPv6
+9. Do not revert to HTTP as the `webConfigurator` protocol
 
 Now, we have all the `pfSense` network interfaces correctly configured
 
@@ -348,9 +348,9 @@ Now, unplug the network cable and verify you cannot browse anymore.
 
 It's time to start our firewall and connect over Wi-Fi.
 
-1) Connect to the network (or you can enable `connect automatically`)
-2) Start the `pfSense` VM
-3) Browse.
+1. Connect to the network (or you can enable `connect automatically`)
+2. Start the `pfSense` VM
+3. Browse.
 
 You should be able again. Let's check it is working with a traceroute:
 
