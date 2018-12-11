@@ -2,7 +2,7 @@
 title: "How to install pfSense in a VirtualBox VM on your laptop"
 description: "Do you want to place a professional firewall in front of your laptop?"
 last_update: "2018-12-11"
-published: false
+published: true
 ---
 
 # How to install pfSense in a VirtualBox VM on your laptop
@@ -52,7 +52,7 @@ In this tutorial we will assume that the home-network is configured in the `192.
 
 The final status is depicted in Fig. 2 below, where we have removed everything outside the house, which is not under our control.
 
-![Fig.2 - Final Logical Network Layout](/assets/img/pfvb/pfvb02.PNG)
+![Fig.2 - Final Logical Network Layout](/assets/img/pfvb/pfvb02.png)
 
 Basically we want that when we use the wireless connection, all the communications are filtered by `pfSense`. When we plug an ethernet cable, the `laptop` will be able to communicate with the `router` directly. This configuration will provide us two benefits:
 
@@ -70,7 +70,7 @@ The first step in our configuration is to create the *dummy* network interface t
 
 In the VirtualBox Manager console, select `File`-->`Host Network Manager`, then click on the `Create` icon to create an `Host-only Network Interface`. This will create a new network interface on your laptop, called `VirtualBox Host-Only Ethernet Adapter`.
 
-![Fig.3 - Host-Only Ethernet Adapter](/assets/img/pfvb/pfvb-img01.PNG)
+![Fig.3 - Host-Only Ethernet Adapter](/assets/img/pfvb/pfvb-img01.png)
 
 This creates a new software interface on your laptop, which will appears next to your existing network interfaces. This will be the interface our laptop will use to communicate with `pfSense`, so let's configure it that way.
 
@@ -181,7 +181,7 @@ If not, something went wrong during the installation: go back and troubleshoot a
 
 If yes, congratulation: you're ready to configure the `pfSense` network interfaces.
 
-Remember when I told you to take not of the MAC addresses of the cards? Here is where you use them.
+Remember when I told you to take note of the MAC addresses of the cards? Here is where you use them.
 
 In the `pfSense` console, select option `1) Assign Interfaces`. You will be presented with the `VLAN configuration`
 
@@ -205,9 +205,9 @@ You should now see something like this in your console:
 
 Note the ip address of the LAN interface and note that this is not what we want. According to our plan, the LAN interface should be assigned the address `10.0.0.1`. The address assigned to it is not only wrong, but is colliding with the one assigned to our `router`!
 
-![Fig.2 - Final Logical Network Layout](/assets/img/pfvb/pfvb02.PNG)
+![Fig.2 - Final Logical Network Layout](/assets/img/pfvb/pfvb02.png)
 
-In case you were wondering: this is the reason why we **did not connect the cables** to our virtual interfaces. Before to connect them, we need to do manually configure the LAN interface according to our network Layout.
+In case you were wondering: this is the reason why we **did not connect the cables** to our virtual interfaces. Before to connect them, we need to manually configure the LAN interface according to our network Layout.
 
 So, back to the `pfSense` console:
 
@@ -227,7 +227,7 @@ You should now see the following:
 So, we are ready to give the webConfigurator a try, but first we need to be sure we are really connecting there, so we need to disconnect our laptop from the network.
 
 * Detach any ethernet cable you should have attached
-* Disconnect from the wireless connection the will take over
+* Disconnect from the wireless connection that will take over
 
 Verify that you are effectively disconnected by the external world by trying to reach your default gateway `192.168.1.1`
 
@@ -309,11 +309,11 @@ The problem is quite immediate to identify: the `Ethernet adapter VirtualBox Hos
 
 A quick check on the adapter's properties on VirtualBox immediately shows that there is not such option. Let's try on the Host side.
 
-Open the `Network Connections` in `Control Panel`; select the `VirtualBox Host-Only Network` adapter; open its properties; select `Internet Protocol Version 4 (TCP/IPv4)` and modify its properties as described in the figure below:
-
-![Fig.37 - Routed](/assets/img/pfvb/pfvb-img35.PNG)
+Open the `Network Connections` in `Control Panel`; select the `VirtualBox Host-Only Network` adapter; open its properties; select `Internet Protocol Version 4 (TCP/IPv4)` and modify its properties by adding `10.0.0.1` as default gateway.
 
 Save the new configuration, verify it with an `ipconfig -all` command and retry to ping the router. This time you should succeed.
+
+![Fig.37 - Routed](/assets/img/pfvb/pfvb-img35.PNG)
 
 Let's verify that it is really working: open your web browser, go surfing and pat yourself on the shoulder!
 
