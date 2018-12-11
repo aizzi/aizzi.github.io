@@ -38,7 +38,7 @@ So, let's start!
 
 The starting layout is commonly the one depicted in Fig. 1 below.
 
-![Fig. 1 - starting point](/assets/img/pfvb/pfvb01.PNG)
+![Fig. 1 - starting point](/assets/img/pfvb/pfvb01.png)
 
 Our `laptop` has usually two ethernet connections. The first one is a cabled connection to a `router`; the second one is a wireless connection to a `WiFi Access Point` (usually in the same case of the `router`, but logically separated). The `router` connects our `home` with the `Internet Provider` who, in turn, connects us to the `Internet`.
 
@@ -70,7 +70,7 @@ The first step in our configuration is to create the *dummy* network interface t
 
 In the VirtualBox Manager console, select `File`-->`Host Network Manager`, then click on the `Create` icon to create an `Host-only Network Interface`. This will create a new network interface on your laptop, called `VirtualBox Host-Only Ethernet Adapter`.
 
-![Fig.3 - Host-Only Ethernet Adapter](/assets/img/pfvb/pfvb-img01.png)
+![Fig.3 - Host-Only Ethernet Adapter](/assets/img/pfvb/pfvb-img01.PNG)
 
 This creates a new software interface on your laptop, which will appears next to your existing network interfaces. This will be the interface our laptop will use to communicate with `pfSense`, so let's configure it that way.
 
