@@ -109,7 +109,7 @@ The layout of the `ConsoleController` is described into the `console.kv` file:
 
 Go on and execute `console.py`. If everything is fine, you should see the following window.
 
-![Fig. 1 - starting point](/assets/img/kivy_chat/img01.png)
+![Fig. 1 - starting point](/assets/img/kivy_chat/img01.PNG)
 
 It does not contain anything yet, so let's define the `chat_widget` and the `input_widget`. Move to `console.kv` and modify `<ConsoleController>` in the following way:
 
@@ -134,7 +134,7 @@ The `[TextInput](https://kivy.org/doc/stable/api-kivy.uix.textinput.html)` secti
 
 Now, you should see the following when you execute your console.
 
-![Fig. 2](/assets/img/kivy_chat/img02.png)
+![Fig. 2](/assets/img/kivy_chat/img02.PNG)
 
 and you should be able to insert your text in the `TextInput` field.
 
@@ -204,7 +204,7 @@ This function replace the `chat_widget` text with the user's input.
 
 Now execute `console.py`, enter some text in the input field and press enter. If everything is fine, your chat window should change to show your message.
 
-![Fig. 3](/assets/img/kivy_chat/img03.png)
+![Fig. 3](/assets/img/kivy_chat/img03.PNG)
 
 ## Keeping The Chat History
 
@@ -249,7 +249,7 @@ def AddMessageToChatHistory(self, message):
 
 Go on and execute your new console. Insert a couple of message and check the result:
 
-![Fig. 4](/assets/img/kivy_chat/img04.png)
+![Fig. 4](/assets/img/kivy_chat/img04.PNG)
 
 ## Align To The Left
 
@@ -264,7 +264,7 @@ halign: 'left'
 
 Restart your application, insert a couple of messages and check that everything is working fine.
 
-![Fig. 5](/assets/img/kivy_chat/img05.png)
+![Fig. 5](/assets/img/kivy_chat/img05.PNG)
 
 ## Scrolling
 
@@ -366,7 +366,7 @@ This way, the text into the `chat_widget` can grow vertically as it's needed and
 
 Now, go on and execute the app. Insert a test message. This will be echoed 100 times and you should be able to scroll through the history.
 
-![Fig. 6](/assets/img/kivy_chat/img06.png)
+![Fig. 6](/assets/img/kivy_chat/img06.PNG)
 
 Remember to change the `AddMessageToChatHistory` method back to its original form:
 
@@ -422,7 +422,7 @@ def chat_input_callback(self, message):
     return False
 ```
 
-![Fig. 7](/assets/img/kivy_chat/img07.png)
+![Fig. 7](/assets/img/kivy_chat/img07.PNG)
 
 ## Talking With A Server
 
@@ -601,7 +601,7 @@ Connection received from client:  522ca95dd5da4aa3bcdd551517a37d44
 Received user input: Hello there!
 ```
 
-![Fig. 8](/assets/img/kivy_chat/img08.png)
+![Fig. 8](/assets/img/kivy_chat/img08.PNG)
 
 ## Complete Files
 
