@@ -1,6 +1,6 @@
 ---
 title: "How to create a basic chat interface with Kivy"
-description: "In this tutorial I describe the steps needed to create a basic dektop chat interface in Python using the [Kivy](https://kivy.org/) framework."
+description: "In this tutorial I describe the steps needed to create a basic dektop chat interface in Python using the Kivy framework."
 last_update: "2020-01-06"
 published: true
 ---
@@ -20,6 +20,8 @@ published: true
 11. [Exchanging Messages](#talking-with-a-server)
 12. [Complete Files](#complete-files)
 13. [Conclusion](#conclusion)
+
+![Fig. 8](/assets/img/kivy_chat/img08.PNG)
 
 ## Assumptions
 This tutorial assume the following knowledge on your side:
@@ -95,7 +97,7 @@ if __name__ == "__main__":
 
 Nothing fancy here. We define a class `ConsoleApp` based on the [Kivy App class](https://kivy.org/doc/stable/api-kivy.app.html). It creates the main window for the application and will add to it the `ConsoleController` widget as the `root widget`.
 
-The `ConsoleController` is based on the `[BoxLayout](https://kivy.org/doc/stable/api-kivy.uix.boxlayout.html#kivy.uix.boxlayout.BoxLayout)` widget. This is basically a container for other widgets, that can be arranged either vertically or horizontally. We'll arrange them vertically: the `chat window` on top, the `input control` at the bottom.
+The `ConsoleController` is based on the [BoxLayout](https://kivy.org/doc/stable/api-kivy.uix.boxlayout.html#kivy.uix.boxlayout.BoxLayout) widget. This is basically a container for other widgets, that can be arranged either vertically or horizontally. We'll arrange them vertically: the `chat window` on top, the `input control` at the bottom.
 
 The layout of the `ConsoleController` is described into the `console.kv` file:
 
@@ -128,9 +130,9 @@ It does not contain anything yet, so let's define the `chat_widget` and the `inp
         height: self.minimum_height
 ```
 
-The `[Label](https://kivy.org/doc/stable/api-kivy.uix.label.html)` section define our `chat widget`, where we will store our conversation's text. `id` assigns an identifier to it, so that we can refer to it from other widgets. `text` define its content. `size_hint` is a responsive statement to assign the widget all available space in the window (everything except the `TextInput` define below).
+The [Label](https://kivy.org/doc/stable/api-kivy.uix.label.html) section define our `chat widget`, where we will store our conversation's text. `id` assigns an identifier to it, so that we can refer to it from other widgets. `text` define its content. `size_hint` is a responsive statement to assign the widget all available space in the window (everything except the `TextInput` define below).
 
-The `[TextInput](https://kivy.org/doc/stable/api-kivy.uix.textinput.html)` section define the `input_widget` for user's input. `size_hint(1, None)` means it will use all the horizontal space, but will not follow on the vertical dimension. This is defined by the `height` properties to be exactly the minimum needed to contain the text.
+The [TextInput](https://kivy.org/doc/stable/api-kivy.uix.textinput.html) section define the `input_widget` for user's input. `size_hint(1, None)` means it will use all the horizontal space, but will not follow on the vertical dimension. This is defined by the `height` properties to be exactly the minimum needed to contain the text.
 
 Now, you should see the following when you execute your console.
 
@@ -305,7 +307,7 @@ This proved to be quite complex to accomplish, so let's review it line by line.
 ScrollView
 ```
 
-instantiate an instance of `[ScrollView Class](https://kivy.org/doc/stable/api-kivy.uix.scrollview.html)`
+instantiate an instance of [ScrollView Class](https://kivy.org/doc/stable/api-kivy.uix.scrollview.html)
 
 ```
 id: scroll_view_id
