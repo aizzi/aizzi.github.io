@@ -142,6 +142,7 @@ Install [Visual Studio Code](https://code.visualstudio.com). Download the packag
 ```
 > cd ~/Downloads
 > sudo apt install ./<file>.deb
+> git config --global core.editor "code --wait"
 ```
 
 Launch `Visual Studio Code` and install the following Extensions:
@@ -168,4 +169,5 @@ To install Docker, head to [Docker Quick Start](https://hub.docker.com/?overlay=
 > sudo apt-get install docker-ce
 > sudo apt-get install docker-ce-cli
 > sudo apt-get install containerd.io
+> sudo docker run hello-world
 ```
