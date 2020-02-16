@@ -153,14 +153,14 @@ Launch `Visual Studio Code` and install the following Extensions:
 ---
 ## Docker
 
-To install Docker, head to [Docker Quick Start](https://hub.docker.com/?overlay=onboarding) and follow the instructions.
+To install Docker, head to [Get Docker Engine - Community for Ubuntu](https://docs.docker.com/install/linux/docker-ce/ubuntu) and follow the instructions.
 
 ```
 > sudo apt-get update
 > sudo apt-get install apt-transport-https
 > sudo apt-get install ca-certificates
 > sudo apt-get install curl
-> sudo apt-get install gnupg2
+> sudo apt-get install gnupg-agent
 > sudo apt-get install software-properties-common
 > curl -fsSL https://download.docker.com/linux/debian/gpg | sudo apt-key add -
 > sudo apt-key fingerprint 0EBFCD88
@@ -171,3 +171,14 @@ To install Docker, head to [Docker Quick Start](https://hub.docker.com/?overlay=
 > sudo apt-get install containerd.io
 > sudo docker run hello-world
 ```
+
+Now follow the instructions on [Post-installation steps for Linux](https://docs.docker.com/install/linux/linux-postinstall/) in order to manage Docker as a non-root user and be able to interface it from Visual Studio Code.
+
+```
+> sudo groupadd docker
+> sudo usermod -aG docker $USER
+> newgrp docker
+> docker run hello-world
+```
+
+You need to restart your machine in order to have Visual Studio Code to connect to the Docker engine.
