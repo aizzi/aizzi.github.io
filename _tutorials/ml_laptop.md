@@ -42,6 +42,12 @@ Ubuntu 18.04.3 LTE is the operating system of choice. It is well supported and d
 10. I like as well to format dates and currencies the Italian way. So, in the same panel, select `Manage Installed Languages` and install the support for Italian.
 11. Restart the computer and you're ready to go.
 
+### Installing support for MX Master 2S
+> sudo add-apt-repository ppa:bluetooth/bluez
+> sudo apt install bluez
+> sudo service bluetooth restart
+
+
 ---
 ## Browser
 
