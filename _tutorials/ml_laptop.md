@@ -105,6 +105,16 @@ Verify that both version of Python exists on the system:
 > which python3.8
 ```
 
+You may want to set an alias to easily execute different versions of Python. To do so, move to your home directory and create a file called `.bash_aliases` with the following entries:
+
+```
+alias p36='python3'
+alias p38='python3.8'
+alias pip38='pip3.8'
+```
+
+Now logoff and logon and you will be able to use the short aliases to execute the different versions of Python.
+
 ---
 ## C/C++ Compiler
 [GCC](https://gcc.gnu.org/install/) and C++ compiler should be already installed, as a result of the `build-essential` library. Verify by running `gcc --version` and `g++ --version` commands.
