@@ -198,3 +198,17 @@ Now follow the instructions on [Post-installation steps for Linux](https://docs.
 ```
 
 You need to restart your machine in order to have Visual Studio Code to connect to the Docker engine.
+
+---
+## PyTorch
+
+We will install [PyTorch] (https://pytorch.org/get-started/locally/) in a virtual environment.
+
+Move to the directory you want to create the virtual environment into and run the following command
+
+```
+> python -m venv --prompt MLE01 .venv
+> . ./venv/bin/activate
+> pip install torch==1.4.0+cpu torchvision==0.5.0+cpu -f https://download.pytorch.org/whl/torch_stable.html
+```
+
