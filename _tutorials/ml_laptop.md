@@ -43,6 +43,7 @@ Ubuntu 18.04.3 LTE is the operating system of choice. It is well supported and d
 11. Restart the computer and you're ready to go.
 
 ### Installing support for MX Master 2S
+
 > sudo add-apt-repository ppa:bluetooth/bluez
 > sudo apt install bluez
 > sudo service bluetooth restart
@@ -51,6 +52,44 @@ Good level of details about bluetooth on Ubuntu is availabel [here](https://medi
 
 A useful tool to check in case of bluetooth problems is `bluetoothctl`
 
+### Virtual Environment Management
+
+It will be extremely probable that you will end up with a lot of different virtual environments to play with, so you want to organize them in a good way. This is how I do it.
+
+1. All my source code will go into a single repository:
+`~/Programming/SourceCode`
+2. All virtual environments will be stored in the folder `~/Programming/envs`, each one in its specific folder.
+3. To create a new environment use the following code:
+```
+> python -m venv --prompt <unique_promp> ~/Programming/envs/<environment_identifier> 
+```
+4. Modify `~/.bashrc` by adding the following code at the end of the file:
+```
+# Custom Functions definitions.
+# You may want to put all your custom functions into a separate file like
+# ~/.bash_functions, instead of adding them here directly.
+
+if [ -f ~/.bash_functions ]; then
+    . ~/.bash_functions
+
+```
+5. Create the file `~/.bash_functions` and add the following code:
+```
+activate_env() {
+    # Activate a virtual environment
+    if [ "$1" = "" ]; then
+        echo "This are the available environments"
+        ls ~/Programming/envs
+    else
+        echo "Activating environment $1"
+        . ~/Programming/envs/$1/bin/activate
+    fi
+}
+```
+6. Source the `~./bashrc` or logoff and logon.
+7. Now you can use `activate_env` from the command line to activate your virtual environment. Just type `activate_env` to get a list of available environments, or `activate_env <name of the environment>` to activate a specific environment.
+
+  > **Disclaimer**: I know the function is really crude, but I'm working on functionality over fanciness here. You can make it better for yourself.
 ---
 ## Browser
 
