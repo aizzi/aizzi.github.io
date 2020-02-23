@@ -49,6 +49,7 @@ Ubuntu 18.04.3 LTE is the operating system of choice. It is well supported and d
 
 Good level of details about bluetooth on Ubuntu is availabel [here](https://medium.com/@overcode/fixing-bluetooth-in-ubuntu-pop-os-18-04-d4b8dbf7ddd6)
 
+A useful tool to check in case of bluetooth problems is `bluetoothctl`
 
 ---
 ## Browser
