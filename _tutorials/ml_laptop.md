@@ -47,6 +47,8 @@ Ubuntu 18.04.3 LTE is the operating system of choice. It is well supported and d
 > sudo apt install bluez
 > sudo service bluetooth restart
 
+Good level of details about bluetooth on Ubuntu is availabel [here](https://medium.com/@overcode/fixing-bluetooth-in-ubuntu-pop-os-18-04-d4b8dbf7ddd6)
+
 
 ---
 ## Browser
