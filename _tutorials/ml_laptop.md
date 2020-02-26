@@ -52,6 +52,8 @@ Good level of details about bluetooth on Ubuntu is availabel [here](https://medi
 
 A useful tool to check in case of bluetooth problems is `bluetoothctl`
 
+I'm still not able to have my Logitech MX Master 2S reliably working with this setup. Bluetooth on Ubuntu appears to be very unstable. My suggestion is to use corded mouse and keyboards.
+
 ### Virtual Environment Management
 
 It will be extremely probable that you will end up with a lot of different virtual environments to play with, so you want to organize them in a good way. This is how I do it.
@@ -90,6 +92,7 @@ activate_env() {
 7. Now you can use `activate_env` from the command line to activate your virtual environment. Just type `activate_env` to get a list of available environments, or `activate_env <name of the environment>` to activate a specific environment.
 
   > **Disclaimer**: I know the function is really crude, but I'm working on functionality over fanciness here. You can make it better for yourself.
+
 ---
 ## Browser
 
@@ -121,6 +124,8 @@ Install the following libraries, which will be needed in the following steps:
 
 ---
 ## Python
+
+> **Note**: You can skip this passage if you are going to use *Anaconda*, because it will take care to install Python using *Conda*. See below for instructions.
 
 Ubuntu comes with Python 3.6.9 preinstalled. You can verify this by executing the command:
 
@@ -254,3 +259,41 @@ Move to the directory you want to create the virtual environment into and run th
 > pip install torch==1.4.0+cpu torchvision==0.5.0+cpu -f https://download.pytorch.org/whl/torch_stable.html
 ```
 
+---
+## Miniconda
+
+`Miniconda` is a free minimal installer for `conda`. It includes just the bare minimum to get started and this is exactly why I like it. The following instructions will guide through the `Miniconda` installation.
+
+Detailed instructions on which this guide is based are available [here](https://docs.conda.io/projects/conda/en/latest/user-guide/install/download.html#anaconda-or-miniconda).
+
+1. Download the Linux installer from [here](https://docs.conda.io/en/latest/miniconda.html#linux-installers). Be sure to download the appropriate version. In my case, I installed the `Python 3.7 Miniconda Linux 64-bit`.
+
+2. Verify the cryptographic has of the downloaded file:
+`> sha256sum Miniconda3-latest-Linux-x86_64.sh`
+
+3. Follow the [installation instructions](https://conda.io/projects/conda/en/latest/user-guide/install/index.html)
+`> bash Miniconda3-latest-Linux-x86_64.sh`
+
+4. Choose to install into `~/Programming/Tools/miniconda3`
+
+5. Let the installer initialize Miniconda3
+
+6. Close and re-open your shell. You will see that your prompt was modified to include `(base)` in order to show you are on the root environment.
+
+7. Update `conda` with 
+`> conda update conda`
+
+8. Verify your Python installation:
+```
+(base) aizzi@PC02-ML:~$ python
+Python 3.7.4 (default, Aug 13 2019, 20:35:49) 
+[GCC 7.3.0] :: Anaconda, Inc. on linux
+Type "help", "copyright", "credits" or "license" for more information.
+>>> quit()
+(base) aizzi@PC02-ML:~$ which python
+/home/aizzi/Programming/Tools/miniconda3/bin/python
+(base) aizzi@PC02-ML:~$ which python3.8
+/usr/local/bin/python3.8
+(base) aizzi@PC02-ML:~$ which python3.6
+/usr/bin/python3.6
+```
