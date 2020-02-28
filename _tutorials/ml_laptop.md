@@ -268,7 +268,7 @@ Detailed instructions on which this guide is based are available [here](https://
 
 1. Download the Linux installer from [here](https://docs.conda.io/en/latest/miniconda.html#linux-installers). Be sure to download the appropriate version. In my case, I installed the `Python 3.7 Miniconda Linux 64-bit`.
 
-2. Verify the cryptographic has of the downloaded file:
+2. Verify the cryptographic hash of the downloaded file:
 `> sha256sum Miniconda3-latest-Linux-x86_64.sh`
 
 3. Follow the [installation instructions](https://conda.io/projects/conda/en/latest/user-guide/install/index.html)
@@ -297,3 +297,27 @@ Type "help", "copyright", "credits" or "license" for more information.
 (base) aizzi@PC02-ML:~$ which python3.6
 /usr/bin/python3.6
 ```
+
+---
+## Jupyter Lab
+
+[`JupyterLab`](https://jupyterlab.readthedocs.io/en/stable/getting_started/overview.html) is the successor of `Jupyter Notebook`. It has a modern interface while preserving the features of Notebooks. If you're starting with Notebooks, I think it's worth to start learning `JupyterLab` instead of `Jupyter Notebook`.
+
+To install `JupyterLab` in your base environment using `conda`:
+
+```
+> conda search jupyterlab
+> conda install jupyterlab=1.2.6
+> conda install nb_conda
+> jupyter lab
+```
+
+The command `conda install nb_conda` will install modules to manage your environments. This way, you will be able to execute kernels in different environment while using `JupyterLab` in the *(base)* environment.
+
+Let's say you have created a conda environment named `MLE01`. Now, you activate the environment and then run the following command in it to install the kernel:
+
+```
+(MLE01) aizzi@PC02-ML:~$ conda install ipykernel
+```
+
+Now, when you execute `jupyter lab` from the `(base)` environment, you will see the `MLE01` kernel available to execute in the `JupyterLab` console.
