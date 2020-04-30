@@ -2,7 +2,7 @@
 title: "How to setup a laptop for ML exploration"
 description: "In this tutorial I describe how I configured a laptop for my learning of ML related topics."
 last_update: "2020-02-02"
-published: false
+published: true
 ---
 # How to setup a laptop for Machine Learning exploration
 ###### Last Updated: {{ page.last_update | date: "%A, %B %d, %Y" }}
