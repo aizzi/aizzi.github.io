@@ -66,6 +66,7 @@ It will be extremely probable that you will end up with a lot of different virtu
 > python -m venv --prompt <unique_promp> ~/Programming/envs/<environment_identifier> 
 ```
 4. Modify `~/.bashrc` by adding the following code at the end of the file:
+
 ```
 # Custom Functions definitions.
 # You may want to put all your custom functions into a separate file like
@@ -75,6 +76,7 @@ if [ -f ~/.bash_functions ]; then
     . ~/.bash_functions
 
 ```
+
 5. Create the file `~/.bash_functions` and add the following code:
 ```
 activate_env() {
