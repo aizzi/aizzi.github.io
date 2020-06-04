@@ -71,7 +71,7 @@ Type `kubectl` on `k8sMaster` to see how to use it. The common format of a kubec
 You can deploy your first app on Kubernetes with the `kubectl create deployment` command. You need to provide the deployment name and app image location (including the full repository url for images hosted outside Docker hub)
 
 ```
-aizzi@k8sMaster:~$ kubectl create deployment kubernetes-bootcamp --image=gcr.io/google-samples/kubernetes-bootcamp:v1 -n k8s-tutorial --port 8080
+aizzi@k8sMaster:~$ kubectl create deployment kubernetes-bootcamp --image=gcr.io/google-samples/kubernetes-bootcamp:v1 -n k8s-tutorial 
 deployment.apps/kubernetes-bootcamp created
 ```
 
@@ -219,18 +219,87 @@ A kubernetes pod can be considered as a "virtual server" running on the kubernet
 First of all, let's get the name of the POD:
 
 ```
-aizzi@k8sMaster:~$ kubectl get pod -n k8s-tutorial
-NAME                                   READY   STATUS    RESTARTS   AGE
-kubernetes-bootcamp-6f6656d949-fww5k   1/1     Running   0          85s
-aizzi@k8sMaster:~$ export POD_NAME=kubernetes-bootcamp-6f6656d949-fww5k
+aizzi@k8sMaster:~$ kubectl get pod -n k8s-tutorial -o wide
+NAME                                   READY   STATUS    RESTARTS   AGE   IP              NODE       NOMINATED NODE   READINESS GATES
+kubernetes-bootcamp-6f6656d949-nhj9w   1/1     Running   0          57s   192.168.249.1   k8snode1   <none>           <none>
+aizzi@k8sMaster:~$ export POD_NAME=kubernetes-bootcamp-6f6656d949-nhj9w
 aizzi@k8sMaster:~$ echo $POD_NAME
-kubernetes-bootcamp-6f6656d949-fww5k
+kubernetes-bootcamp-6f6656d949-nhj9w
 ```
 
-Now start the proxy as detailed in the previous section. Now, open a command line on the host machine and issue the following command:
+Now, open a new terminal and start the proxy on `localhost`:
 
 ```
-C:\Users\CZ100003>curl http://k8smaster:8001/api/v1/namespaces/k8s-tutorial/pods/kubernetes-bootcamp-6f6656d949-fww5k:8080/proxy/
-Hello Kubernetes bootcamp! | Running on: kubernetes-bootcamp-6f6656d949-fww5k | v=1
+aizzi@k8sMaster:~$ kubectl proxy
+Starting to serve on 127.0.0.1:8001
 ```
 
+Open a command line on the host machine and issue the following command:
+
+```
+aizzi@k8sMaster:~$ curl http://localhost:8001/api/v1/namespaces/k8s-tutorial/pods/$POD_NAME:8080/proxy/
+Hello Kubernetes bootcamp! | Running on: kubernetes-bootcamp-6f6656d949-nhj9w | v=1
+```
+
+We can retrieve the logs using the `kubectl logs` command:
+
+```
+aizzi@k8sMaster:~$ kubectl logs $POD_NAME -n k8s-tutorial
+Kubernetes Bootcamp App Started At: 2020-06-04T14:26:13.207Z | Running On:  kubernetes-bootcamp-6f6656d949-nhj9w
+
+Running On: kubernetes-bootcamp-6f6656d949-nhj9w | Total Requests: 1 | App Uptime: 226.639 seconds | Log Time: 2020-06-04T14:29:59.846Z
+```
+
+We can execute commands directly on the container once the Pod is up and running, using the `exec` command:
+
+```
+aizzi@k8sMaster:~$ kubectl exec $POD_NAME -n k8s-tutorial -- env
+PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+HOSTNAME=kubernetes-bootcamp-6f6656d949-nhj9w
+KUBERNETES_SERVICE_PORT_HTTPS=443
+KUBERNETES_PORT=tcp://10.96.0.1:443
+KUBERNETES_PORT_443_TCP=tcp://10.96.0.1:443
+KUBERNETES_PORT_443_TCP_PROTO=tcp
+KUBERNETES_PORT_443_TCP_PORT=443
+KUBERNETES_PORT_443_TCP_ADDR=10.96.0.1
+KUBERNETES_SERVICE_HOST=10.96.0.1
+KUBERNETES_SERVICE_PORT=443
+NPM_CONFIG_LOGLEVEL=info
+NODE_VERSION=6.3.1
+HOME=/root
+```
+
+We can start a bash session inside the Pod's container:
+
+```
+aizzi@k8sMaster:~$ kubectl exec -ti $POD_NAME -n k8s-tutorial -- bash
+root@kubernetes-bootcamp-6f6656d949-nhj9w:/# ls
+bin  boot  core  dev  etc  home  lib  lib64  media  mnt  opt  proc  root  run  sbin  server.js  srv  sys  tmp  usr  var
+
+root@kubernetes-bootcamp-6f6656d949-nhj9w:/# cat server.js
+var http = require('http');
+var requests=0;
+var podname= process.env.HOSTNAME;
+var startTime;
+var host;
+var handleRequest = function(request, response) {
+  response.setHeader('Content-Type', 'text/plain');
+  response.writeHead(200);
+  response.write("Hello Kubernetes bootcamp! | Running on: ");
+  response.write(host);
+  response.end(" | v=1\n");
+  console.log("Running On:" ,host, "| Total Requests:", ++requests,"| App Uptime:", (new Date() - startTime)/1000 , "seconds", "| Log Time:",new Date());
+}
+var www = http.createServer(handleRequest);
+www.listen(8080,function () {
+    startTime = new Date();;
+    host = process.env.HOSTNAME;
+    console.log ("Kubernetes Bootcamp App Started At:",startTime, "| Running On: " ,host, "\n" );
+});
+
+root@kubernetes-bootcamp-6f6656d949-nhj9w:/# curl localhost:8080
+Hello Kubernetes bootcamp! | Running on: kubernetes-bootcamp-6f6656d949-nhj9w | v=1
+
+root@kubernetes-bootcamp-6f6656d949-nhj9w:/# exit
+exit
+```
