@@ -547,7 +547,57 @@ k8smaster   Ready    master   123m   v1.18.2
 k8snode1    Ready    <none>   116s   v1.18.2
 ```
 
-## 11 - Conclusions
+## 11 - Adding a Node after 24 hours
+
+The token generated on the server expires after 24 hours. If you want to add a new Node after that period, a new token must be generated.
+
+See if a token exist with `kubeadm token list`. If not, generate a new one with `kubeadm token create --print-join-command`
+
+## 12 - Setting up the correct IP Addresses for the nodes
+
+The worker internal IP address is the wrong one:
+
+```
+aizzi@k8sMaster:~$ kubectl get nodes -o wide
+NAME        STATUS     ROLES    AGE   VERSION   INTERNAL-IP   EXTERNAL-IP   OS-IMAGE             KERNEL-VERSION       CONTAINER-RUNTIME
+k8smaster   Ready      master   10d   v1.18.3   10.0.2.15     <none>        Ubuntu 18.04.4 LTS   4.15.0-101-generic   docker://19.3.11
+k8snode1    NotReady   <none>   7s    v1.18.3   10.0.2.15     <none>        Ubuntu 18.04.4 LTS   4.15.0-101-generic   docker://19.3.11
+```
+
+This is the NAT address of the VM, which is automatically provided by VirtualBox. It is the interface used to access the internet, but it is not the one we want for our nodes.
+
+In order to correct it, edit the file `/etc/default/kubelet` and add the following line:
+
+```
+KUBELET_EXTRA_ARGS=--node-ip=<ip you want the node on>
+```
+
+Then restart the kubelet:
+
+```
+aizzi@k8sNode1:~$ sudo systemctl daemon-reload
+aizzi@k8sNode1:~$ sudo systemctl restart kubelet
+```
+
+Now we have the right address:
+
+```
+aizzi@k8sMaster:~$ kubectl get nodes -o wide
+NAME        STATUS   ROLES    AGE     VERSION   INTERNAL-IP     EXTERNAL-IP   OS-IMAGE             KERNEL-VERSION       CONTAINER-RUNTIME
+k8smaster   Ready    master   10d     v1.18.3   10.0.2.15       <none>        Ubuntu 18.04.4 LTS   4.15.0-101-generic   docker://19.3.11
+k8snode1    Ready    <none>   3m32s   v1.18.3   192.168.56.11   <none>        Ubuntu 18.04.4 LTS   4.15.0-101-generic   docker://19.3.11
+```
+
+Do the same on the master too.
+
+```
+aizzi@k8sMaster:~$ kubectl get nodes -o wide
+NAME        STATUS   ROLES    AGE     VERSION   INTERNAL-IP     EXTERNAL-IP   OS-IMAGE             KERNEL-VERSION       CONTAINER-RUNTIME
+k8smaster   Ready    master   10d     v1.18.3   192.168.56.10   <none>        Ubuntu 18.04.4 LTS   4.15.0-101-generic   docker://19.3.11
+k8snode1    Ready    <none>   8m29s   v1.18.3   192.168.56.11   <none>        Ubuntu 18.04.4 LTS   4.15.0-101-generic   docker://19.3.11
+```
+
+## 13 - Conclusions
 
 You now have a 2-node kubernetes cluster to play with. 
 
