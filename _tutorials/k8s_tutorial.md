@@ -303,3 +303,135 @@ Hello Kubernetes bootcamp! | Running on: kubernetes-bootcamp-6f6656d949-nhj9w | 
 root@kubernetes-bootcamp-6f6656d949-nhj9w:/# exit
 exit
 ```
+
+## 4 - Expose your app publicly
+
+To create a new service and expose it to external traffic we'll use the expose command with NodePort as parameter:
+
+```
+aizzi@k8sMaster:~$ kubectl get deployments -n k8s-tutorial -o wide
+NAME                  READY   UP-TO-DATE   AVAILABLE   AGE   CONTAINERS            IMAGES                                         SELECTOR
+kubernetes-bootcamp   1/1     1            1           41m   kubernetes-bootcamp   gcr.io/google-samples/kubernetes-bootcamp:v1   app=kubernetes-bootcamp
+
+aizzi@k8sMaster:~$ kubectl get pods -n k8s-tutorial -o wide
+NAME                                   READY   STATUS    RESTARTS   AGE   IP              NODE       NOMINATED NODE   READINESS GATES
+kubernetes-bootcamp-6f6656d949-gvlbn   1/1     Running   0          42m   192.168.249.3   k8snode1   <none>           <none>
+
+aizzi@k8sMaster:~$ kubectl expose deployment/kubernetes-bootcamp -n k8s-tutorial --type="NodePort" --port 8080
+service/kubernetes-bootcamp exposed
+
+aizzi@k8sMaster:~$ kubectl get service -n k8s-tutorial -o wide
+NAME                  TYPE       CLUSTER-IP      EXTERNAL-IP   PORT(S)          AGE     SELECTOR
+kubernetes-bootcamp   NodePort   10.109.158.67   <none>        8080:31592/TCP   2m25s   app=kubernetes-bootcamp
+
+aizzi@k8sMaster:~$ kubectl describe service -n k8s-tutorial kubernetes-bootcamp
+Name:                     kubernetes-bootcamp
+Namespace:                k8s-tutorial
+Labels:                   app=kubernetes-bootcamp
+Annotations:              <none>
+Selector:                 app=kubernetes-bootcamp
+Type:                     NodePort
+IP:                       10.109.158.67
+Port:                     <unset>  8080/TCP
+TargetPort:               8080/TCP
+NodePort:                 <unset>  31592/TCP
+Endpoints:                192.168.249.3:8080
+Session Affinity:         None
+External Traffic Policy:  Cluster
+Events:                   <none>
+```
+
+So, let's see our option to reach the container. We can get to it from inside the cluster by accessing port 8080 on the Pod's address:
+
+```
+aizzi@k8sMaster:~$ curl 192.168.249.3:8080
+Hello Kubernetes bootcamp! | Running on: kubernetes-bootcamp-6f6656d949-gvlbn | v=1
+```
+
+or we can reach it from inside the cluster through the service
+
+```
+aizzi@k8sMaster:~$ curl 10.109.158.67:8080
+Hello Kubernetes bootcamp! | Running on: kubernetes-bootcamp-6f6656d949-gvlbn | v=1
+```
+
+If we are outside the cluster, though, we can only reach the nodes. In that case, we can reach it through the exposed port:
+
+```
+C:\Users\CZ100003>curl 192.168.56.10:31592
+Hello Kubernetes bootcamp! | Running on: kubernetes-bootcamp-6f6656d949-gvlbn | v=1
+
+C:\Users\CZ100003>curl 192.168.56.11:31592
+Hello Kubernetes bootcamp! | Running on: kubernetes-bootcamp-6f6656d949-gvlbn | v=1
+```
+
+Please, note that the above commands were issued from the host machine, completely outside of the kubernetes cluster.
+
+The deployment created automatically a label. We can use it to query our list of Pods as well as any other element:
+
+```
+aizzi@k8sMaster:~$ kubectl get pods -l app=kubernetes-bootcamp -n k8s-tutorial -o wide
+NAME                                   READY   STATUS    RESTARTS   AGE   IP              NODE       NOMINATED NODE   READINESS GATES
+kubernetes-bootcamp-6f6656d949-gvlbn   1/1     Running   0          54m   192.168.249.3   k8snode1   <none>           <none>
+
+aizzi@k8sMaster:~$ kubectl get services -l app=kubernetes-bootcamp -n k8s-tutorial -o wide
+NAME                  TYPE       CLUSTER-IP      EXTERNAL-IP   PORT(S)          AGE   SELECTOR
+kubernetes-bootcamp   NodePort   10.109.158.67   <none>        8080:31592/TCP   30m   app=kubernetes-bootcamp
+```
+
+To apply a new label we use the label command followed by the object type, object name and the new label:
+
+```
+aizzi@k8sMaster:~$ kubectl label pod kubernetes-bootcamp-6f6656d949-gvlbn -n k8s-tutorial version=v1
+pod/kubernetes-bootcamp-6f6656d949-gvlbn labeled
+
+aizzi@k8sMaster:~$ kubectl describe pod -n k8s-tutorial kubernetes-bootcamp-6f6656d949-gvlbn
+Name:         kubernetes-bootcamp-6f6656d949-gvlbn
+Namespace:    k8s-tutorial
+Priority:     0
+Node:         k8snode1/192.168.56.11
+Start Time:   Thu, 04 Jun 2020 15:18:38 +0000
+Labels:       app=kubernetes-bootcamp
+              pod-template-hash=6f6656d949
+              version=v1
+...
+```
+
+and we can use the new label to access the pod:
+
+```
+aizzi@k8sMaster:~$ kubectl get pods -l version=v1 -n k8s-tutorial -o wide
+NAME                                   READY   STATUS    RESTARTS   AGE   IP              NODE       NOMINATED NODE   READINESS GATES
+kubernetes-bootcamp-6f6656d949-gvlbn   1/1     Running   0          59m   192.168.249.3   k8snode1   <none>           <none>
+```
+
+To delete the service we can use the `delete service` command:
+
+```
+aizzi@k8sMaster:~$ kubectl get services -l app=kubernetes-bootcamp -n k8s-tutorial -o wide
+NAME                  TYPE       CLUSTER-IP      EXTERNAL-IP   PORT(S)          AGE   SELECTOR
+kubernetes-bootcamp   NodePort   10.109.158.67   <none>        8080:31592/TCP   35m   app=kubernetes-bootcamp
+
+aizzi@k8sMaster:~$ kubectl delete services -l app=kubernetes-bootcamp -n k8s-tutorial
+service "kubernetes-bootcamp" deleted
+
+aizzi@k8sMaster:~$ kubectl get services -l app=kubernetes-bootcamp -n k8s-tutorial -o wide
+No resources found in k8s-tutorial namespace.
+```
+
+Now, I cannot connect anymore to the application from outside the cluster:
+
+```
+C:\Users\CZ100003>curl 192.168.56.11:31592
+curl: (7) Failed to connect to 192.168.56.11 port 31592: Connection refused
+
+C:\Users\CZ100003>curl 192.168.56.10:31592
+curl: (7) Failed to connect to 192.168.56.10 port 31592: Connection refused
+```
+
+but I can still access it from inside:
+
+```
+aizzi@k8sMaster:~$ curl 192.168.249.3:8080
+Hello Kubernetes bootcamp! | Running on: kubernetes-bootcamp-6f6656d949-gvlbn | v=1
+```
