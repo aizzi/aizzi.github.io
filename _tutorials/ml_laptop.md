@@ -54,6 +54,8 @@ A useful tool to check in case of bluetooth problems is `bluetoothctl`
 
 I'm still not able to have my Logitech MX Master 2S reliably working with this setup. Bluetooth on Ubuntu appears to be very unstable. My suggestion is to use corded mouse and keyboards.
 
+**Note** : I still had problems even after these actions. I solved by intalling [ltunify](https://git.lekensteyn.nl/ltunify/) and using the Logitech Unify Dongle provided with the mouse.
+
 ### Virtual Environment Management
 
 It will be extremely probable that you will end up with a lot of different virtual environments to play with, so you want to organize them in a good way. This is how I do it.
