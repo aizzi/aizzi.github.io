@@ -1,5 +1,5 @@
 ---
-title: "Kubernetes Tutorial"
+title: "Kubernetes Basics Tutorial"
 description: "Notes and thoughts about the official Kubernetes tutorial"
 last_update: "2020-05-1125"
 published: false
@@ -15,7 +15,7 @@ The main reason for it is that the official tutorials use an online Minikube env
 
 > I create a namespace for testing with `kubectl create ns k8s_tutorial`. They I will follow the official tutorial in this namespace (by adding `-n k8s_tutorial` to the commands). Once I've finished (or before to shutdown), I just issue a `kubectl delete ns k8s_tutorial` and I'm done.
 
-> A side effect of this is that details about running pods and similar information will not be consistent across this tutorial. I'm sorry for that. I will try to fix the issue in the future.
+> A side effect of this is that details about running pods and similar information will not be consistent across this tutorial, since I'm running it across multiple days. I'm sorry for that. I will try to fix the issue in the future.
 
 > In order to facilitate my explorative tests splitting them over multiple days, I created a `start_k8s_tutorial.sh` and `stop_k8s_tutorial.sh` scripts which you can find details at the end of this tutorial.
 
@@ -435,3 +435,389 @@ but I can still access it from inside:
 aizzi@k8sMaster:~$ curl 192.168.249.3:8080
 Hello Kubernetes bootcamp! | Running on: kubernetes-bootcamp-6f6656d949-gvlbn | v=1
 ```
+
+## 5 - Scale your app
+
+Sometime we need more than one pod running to satisfy the requests on the system. This is called **Scaling** and is accomplished by changing the number of replicas in a Deployment. This will create new Pods and distribute them across Nodes with available resources. It can also be done automatically ([autoscaling](https://kubernetes.io/docs/user-guide/horizontal-pod-autoscaling/)), as well as it is possible to scaled down to zero (which will terminate all pods of the specified Deployment).
+
+Services have an integrated load-balancer that will distribute network traffic.
+
+Let's start by listing the available deployments:
+
+```
+aizzi@k8sMaster:~$ kubectl get deployments -n k8s-tutorial
+NAME                  READY   UP-TO-DATE   AVAILABLE   AGE
+kubernetes-bootcamp   1/1     1            1           15m
+```
+
+* *NAME* lists the names of the Deployments in the cluster
+* *READY* shows the ratio of CURRENT/DESIRED replicas
+* *UP-TO-DATE* displays the number of replicas that have been updated to achieve the desired state
+* *AVAILABLE* displays how many replicas of the application are available to your users
+* *AGE* displays the amount of time that the application has been running
+
+You can check the ReplicaSet created by the Deployment by running:
+
+```
+aizzi@k8sMaster:~$ kubectl get rs -n k8s-tutorial
+NAME                             DESIRED   CURRENT   READY   AGE
+kubernetes-bootcamp-6f6656d949   1         1         1       19m
+```
+
+* *DESIRED* displays the desired number of replicas of the application. You define this when you create the deployment.
+* *CURRENT* displays how many replicas are currently running.
+
+Let's scale up the Deployment to 4 replicas:
+
+```
+aizzi@k8sMaster:~$ kubectl scale deployments/kubernetes-bootcamp -n k8s-tutorial --replicas=4
+deployment.apps/kubernetes-bootcamp scaled
+```
+
+Now we can verify it was scaled:
+
+```
+aizzi@k8sMaster:~$ kubectl get deployments -n k8s-tutorial
+NAME                  READY   UP-TO-DATE   AVAILABLE   AGE
+kubernetes-bootcamp   4/4     4            4           23m
+```
+
+Now let's chechk how many Pods are running:
+
+```
+aizzi@k8sMaster:~$ kubectl get pods -n k8s-tutorial -o wide
+NAME                                   READY   STATUS    RESTARTS   AGE    IP               NODE        NOMINATED NODE   READINESS GATES
+kubernetes-bootcamp-6f6656d949-8ng9s   1/1     Running   0          114s   192.168.249.5    k8snode1    <none>           <none>
+kubernetes-bootcamp-6f6656d949-dtwqk   1/1     Running   0          24m    192.168.249.4    k8snode1    <none>           <none>
+kubernetes-bootcamp-6f6656d949-nwkld   1/1     Running   0          114s   192.168.16.169   k8smaster   <none>           <none>
+kubernetes-bootcamp-6f6656d949-shmrf   1/1     Running   0          114s   192.168.16.170   k8smaster   <none>           <none>
+```
+
+As expected, we now have 4 pods running in the cluster, each one with its own IP address. Note how they were distributed among the two available Nodes (`k8snode1` and `k8smaster`). We can also see this in the Deployment's event log:
+
+```
+aizzi@k8sMaster:~$ kubectl describe deployments/kubernetes-bootcamp -n k8s-tutorial
+Name:                   kubernetes-bootcamp
+Namespace:              k8s-tutorial
+CreationTimestamp:      Thu, 25 Jun 2020 13:27:19 +0000
+Labels:                 app=kubernetes-bootcamp
+Annotations:            deployment.kubernetes.io/revision: 1
+Selector:               app=kubernetes-bootcamp
+Replicas:               4 desired | 4 updated | 4 total | 4 available | 0 unavailable
+StrategyType:           RollingUpdate
+MinReadySeconds:        0
+RollingUpdateStrategy:  25% max unavailable, 25% max surge
+Pod Template:
+  Labels:  app=kubernetes-bootcamp
+  Containers:
+   kubernetes-bootcamp:
+    Image:        gcr.io/google-samples/kubernetes-bootcamp:v1
+    Port:         <none>
+    Host Port:    <none>
+    Environment:  <none>
+    Mounts:       <none>
+  Volumes:        <none>
+Conditions:
+  Type           Status  Reason
+  ----           ------  ------
+  Progressing    True    NewReplicaSetAvailable
+  Available      True    MinimumReplicasAvailable
+OldReplicaSets:  <none>
+NewReplicaSet:   kubernetes-bootcamp-6f6656d949 (4/4 replicas created)
+Events:
+  Type    Reason             Age    From                   Message
+  ----    ------             ----   ----                   -------
+  Normal  ScalingReplicaSet  27m    deployment-controller  Scaled up replica set kubernetes-bootcamp-6f6656d949 to 1
+  Normal  ScalingReplicaSet  4m10s  deployment-controller  Scaled up replica set kubernetes-bootcamp-6f6656d949 to 4
+```
+
+To find out the exposed IP and Port we can use the describe service:
+
+```
+aizzi@k8sMaster:~$ kubectl describe service/kubernetes-bootcamp -n k8s-tutorial
+Name:                     kubernetes-bootcamp
+Namespace:                k8s-tutorial
+Labels:                   app=kubernetes-bootcamp
+Annotations:              <none>
+Selector:                 app=kubernetes-bootcamp
+Type:                     NodePort
+IP:                       10.97.14.103
+Port:                     <unset>  8080/TCP
+TargetPort:               8080/TCP
+NodePort:                 <unset>  31842/TCP
+Endpoints:                192.168.16.169:8080,192.168.16.170:8080,192.168.249.4:8080 + 1 more...
+Session Affinity:         None
+External Traffic Policy:  Cluster
+Events:                   <none>
+```
+
+We can see that kubernetes is exposing the port 31842 on the service, redirecting it to the port 8080 of each of the pods that comprise the service.
+
+```
+C:\Users\CZ100003>curl k8smaster:31842
+Hello Kubernetes bootcamp! | Running on: kubernetes-bootcamp-6f6656d949-dtwqk | v=1
+
+C:\Users\CZ100003>curl k8snode1:31842
+Hello Kubernetes bootcamp! | Running on: kubernetes-bootcamp-6f6656d949-nwkld | v=1
+```
+
+Note how this last command was executed on the client, outside of the kubernetes cluster.
+
+Now let's repeat the command for some time:
+
+```
+C:\Users\CZ100003>curl k8smaster:31842
+Hello Kubernetes bootcamp! | Running on: kubernetes-bootcamp-6f6656d949-8ng9s | v=1
+
+C:\Users\CZ100003>curl k8smaster:31842
+Hello Kubernetes bootcamp! | Running on: kubernetes-bootcamp-6f6656d949-shmrf | v=1
+
+C:\Users\CZ100003>curl k8smaster:31842
+Hello Kubernetes bootcamp! | Running on: kubernetes-bootcamp-6f6656d949-8ng9s | v=1
+
+C:\Users\CZ100003>curl k8smaster:31842
+Hello Kubernetes bootcamp! | Running on: kubernetes-bootcamp-6f6656d949-dtwqk | v=1
+```
+
+Note how each time we hit a different pod, due to the intrinsic Load Balancing capabilities of the system.
+
+Now let's scale the system down:
+
+```
+aizzi@k8sMaster:~$ kubectl scale deployments/kubernetes-bootcamp --replicas=2 -n k8s-tutorial
+deployment.apps/kubernetes-bootcamp scaled
+```
+
+To verify that it was scaled down:
+
+```
+aizzi@k8sMaster:~$ kubectl get deployments -n k8s-tutorial
+NAME                  READY   UP-TO-DATE   AVAILABLE   AGE
+kubernetes-bootcamp   2/2     2            2           51m
+```
+
+and the number of pods is accordingly reduced:
+
+```
+aizzi@k8sMaster:~$ kubectl get pods -n k8s-tutorial -o wide
+NAME                                   READY   STATUS    RESTARTS   AGE   IP              NODE       NOMINATED NODE   READINESS GATES
+kubernetes-bootcamp-6f6656d949-8ng9s   1/1     Running   0          30m   192.168.249.5   k8snode1   <none>           <none>
+kubernetes-bootcamp-6f6656d949-dtwqk   1/1     Running   0          53m   192.168.249.4   k8snode1   <none>           <none>
+```
+
+## 6 - Performing a Rolling Update
+
+**Rolling Updates** allow Deployments' update to take place with zero downtime by incrementally updating Pods instances with new ones. The new Pods will be scheduled on Nodes with available resources.
+
+By default, the maximum number of Pods that can be unavailable during the updated and the maximum number of new Pods that can be created, is one. In Kubernetes, updates are versioned and any Deployment update can be reverted to a previous (stable) version.
+
+Let's start by retrieving the available deployments:
+
+```
+aizzi@k8sMaster:~$ aizzi@k8sMaster:~$ kubectl get deployments -n k8s-tutorial
+NAME                  READY   UP-TO-DATE   AVAILABLE   AGE
+kubernetes-bootcamp   4/4     4            4           66m
+```
+
+and the list of running pods:
+
+```
+aizzi@k8sMaster:~$ kubectl get pods -n k8s-tutorial
+NAME                                   READY   STATUS    RESTARTS   AGE
+kubernetes-bootcamp-6f6656d949-7vjkc   1/1     Running   0          43s
+kubernetes-bootcamp-6f6656d949-8ng9s   1/1     Running   0          46m
+kubernetes-bootcamp-6f6656d949-9k9z6   1/1     Running   0          43s
+kubernetes-bootcamp-6f6656d949-dtwqk   1/1     Running   0          69m
+```
+
+Let's note the current image version running in the pods:
+
+```
+aizzi@k8sMaster:~$ kubectl describe pods -n k8s-tutorial | grep Image:
+    Image:          gcr.io/google-samples/kubernetes-bootcamp:v1
+    Image:          gcr.io/google-samples/kubernetes-bootcamp:v1
+    Image:          gcr.io/google-samples/kubernetes-bootcamp:v1
+    Image:          gcr.io/google-samples/kubernetes-bootcamp:v1
+```
+
+To upgrade the image of the application to version 2, use the `set image` command, followed by the deployment name and the new image version:
+
+```
+aizzi@k8sMaster:~$ kubectl set image deployments/kubernetes-bootcamp -n k8s-tutorial kubernetes-bootcamp=jocatalin/kubernetes-bootcamp:v2
+deployment.apps/kubernetes-bootcamp image updated
+```
+
+You can verify that the image was indeed updated:
+
+```
+aizzi@k8sMaster:~$ kubectl describe pods -n k8s-tutorial | grep Image:
+    Image:          jocatalin/kubernetes-bootcamp:v2
+    Image:          jocatalin/kubernetes-bootcamp:v2
+    Image:          jocatalin/kubernetes-bootcamp:v2
+    Image:          jocatalin/kubernetes-bootcamp:v2
+```
+
+Let's check that the App is effectively running. Get the exposed IP and Port:
+
+```
+aizzi@k8sMaster:~$ kubectl describe services/kubernetes-bootcamp -n k8s-tutorial
+Name:                     kubernetes-bootcamp
+Namespace:                k8s-tutorial
+Labels:                   app=kubernetes-bootcamp
+Annotations:              <none>
+Selector:                 app=kubernetes-bootcamp
+Type:                     NodePort
+IP:                       10.97.14.103
+Port:                     <unset>  8080/TCP
+TargetPort:               8080/TCP
+NodePort:                 <unset>  31842/TCP
+Endpoints:                192.168.16.173:8080,192.168.249.6:8080,192.168.249.7:8080 + 1 more...
+Session Affinity:         None
+External Traffic Policy:  Cluster
+Events:                   <none>
+```
+
+Note how the exposed port is not changed from the the previous section, which was ran immediately before this one. We are still interacting on port 31842. Only this time we get the new version:
+
+```
+C:\Users\CZ100003>curl k8smaster:31842
+Hello Kubernetes bootcamp! | Running on: kubernetes-bootcamp-86656bc875-rj7nm | v=2
+```
+
+We can verify the status of a rollout with the following command:
+
+```
+aizzi@k8sMaster:~$ kubectl rollout status deployments/kubernetes-bootcamp -n k8s-tutorial
+deployment "kubernetes-bootcamp" successfully rolled out
+```
+
+Now let's see how to rollback an update when things go wrong. Update the application to `v10`:
+
+```
+aizzi@k8sMaster:~$ kubectl set image deployments/kubernetes-bootcamp -n k8s-tutorial kubernetes-bootcamp=gcr.io/google-samples/kubernetes-bootcamp:v10
+deployment.apps/kubernetes-bootcamp image updated
+```
+
+Only this time, when we check the status of the deployment we notice something is wrong:
+
+```
+aizzi@k8sMaster:~$ kubectl get deployments -n k8s-tutorial
+NAME                  READY   UP-TO-DATE   AVAILABLE   AGE
+kubernetes-bootcamp   3/4     2            3           86m
+```
+
+We do not have the desired number of Pods available. If we list the Pods again we see something went wrong:
+
+```
+aizzi@k8sMaster:~$ kubectl get pods -n k8s-tutorial
+NAME                                   READY   STATUS             RESTARTS   AGE
+kubernetes-bootcamp-64468f5bc5-bxbpp   0/1     ImagePullBackOff   0          2m23s
+kubernetes-bootcamp-64468f5bc5-rt2zc   0/1     ImagePullBackOff   0          2m23s
+kubernetes-bootcamp-86656bc875-7lwrg   1/1     Running            0          14m
+kubernetes-bootcamp-86656bc875-mxf4r   1/1     Running            0          14m
+kubernetes-bootcamp-86656bc875-rj7nm   1/1     Running            0          14m
+```
+
+A `describe` command on the Pods will provide more details:
+
+```
+aizzi@k8sMaster:~$ kubectl describe pods/kubernetes-bootcamp-64468f5bc5-bxbpp -n k8s-tutorial
+Name:         kubernetes-bootcamp-64468f5bc5-bxbpp
+Namespace:    k8s-tutorial
+Priority:     0
+Node:         k8snode1/192.168.56.11
+Start Time:   Thu, 25 Jun 2020 14:52:55 +0000
+Labels:       app=kubernetes-bootcamp
+              pod-template-hash=64468f5bc5
+Annotations:  cni.projectcalico.org/podIP: 192.168.249.9/32
+              cni.projectcalico.org/podIPs: 192.168.249.9/32
+Status:       Pending
+IP:           192.168.249.9
+IPs:
+  IP:           192.168.249.9
+Controlled By:  ReplicaSet/kubernetes-bootcamp-64468f5bc5
+Containers:
+  kubernetes-bootcamp:
+    Container ID:
+    Image:          gcr.io/google-samples/kubernetes-bootcamp:v10
+    Image ID:
+    Port:           <none>
+    Host Port:      <none>
+    State:          Waiting
+      Reason:       ImagePullBackOff
+    Ready:          False
+    Restart Count:  0
+    Environment:    <none>
+    Mounts:
+      /var/run/secrets/kubernetes.io/serviceaccount from default-token-4kbzn (ro)
+Conditions:
+  Type              Status
+  Initialized       True
+  Ready             False
+  ContainersReady   False
+  PodScheduled      True
+Volumes:
+  default-token-4kbzn:
+    Type:        Secret (a volume populated by a Secret)
+    SecretName:  default-token-4kbzn
+    Optional:    false
+QoS Class:       BestEffort
+Node-Selectors:  <none>
+Tolerations:     node.kubernetes.io/not-ready:NoExecute for 300s
+                 node.kubernetes.io/unreachable:NoExecute for 300s
+Events:
+  Type     Reason     Age                    From               Message
+  ----     ------     ----                   ----               -------
+  Normal   Scheduled  <unknown>              default-scheduler  Successfully assigned k8s-tutorial/kubernetes-bootcamp-64468f5bc5-bxbpp to k8snode1
+  Normal   BackOff    3m9s (x6 over 4m31s)   kubelet, k8snode1  Back-off pulling image "gcr.io/google-samples/kubernetes-bootcamp:v10"
+  Normal   Pulling    2m54s (x4 over 4m31s)  kubelet, k8snode1  Pulling image "gcr.io/google-samples/kubernetes-bootcamp:v10"
+  Warning  Failed     2m53s (x4 over 4m31s)  kubelet, k8snode1  Failed to pull image "gcr.io/google-samples/kubernetes-bootcamp:v10": rpc error: code = Unknown desc = Error response from daemon: manifest for gcr.io/google-samples/kubernetes-bootcamp:v10 not found: manifest unknown: Failed to fetch "v10" from request "/v2/google-samples/kubernetes-bootcamp/manifests/v10".
+  Warning  Failed     2m53s (x4 over 4m31s)  kubelet, k8snode1  Error: ErrImagePull
+  Warning  Failed     2m42s (x7 over 4m31s)  kubelet, k8snode1  Error: ImagePullBackOff
+```
+
+Here we can see that the image was not found on the repository. In order to revert back to a working status, let's use the `rollout` undo command:
+
+```
+aizzi@k8sMaster:~$ kubectl rollout undo deployments/kubernetes-bootcamp -n k8s-tutorial
+deployment.apps/kubernetes-bootcamp rolled back
+```
+
+Now we have again 4 pods running:
+
+```
+aizzi@k8sMaster:~$ kubectl get pods -n k8s-tutorial
+NAME                                   READY   STATUS    RESTARTS   AGE
+kubernetes-bootcamp-86656bc875-7lwrg   1/1     Running   0          19m
+kubernetes-bootcamp-86656bc875-mxf4r   1/1     Running   0          19m
+kubernetes-bootcamp-86656bc875-rj7nm   1/1     Running   0          19m
+kubernetes-bootcamp-86656bc875-t5p7j   1/1     Running   0          28s
+```
+
+and they all have the expected version:
+
+```
+aizzi@k8sMaster:~$ kubectl describe pods -n k8s-tutorial | grep Image:
+    Image:          jocatalin/kubernetes-bootcamp:v2
+    Image:          jocatalin/kubernetes-bootcamp:v2
+    Image:          jocatalin/kubernetes-bootcamp:v2
+    Image:          jocatalin/kubernetes-bootcamp:v2
+```
+
+The rollback was successfull.
+
+## The `start_tutorial` script
+#!/bin/bash
+echo "Create namespace k8s-tutorial"
+kubectl create ns k8s-tutorial
+echo "Create the deployment"
+kubectl create deployment -n k8s-tutorial kubernetes-bootcamp --image=gcr.io/google-samples/kubernetes-bootcamp:v1
+echo "Expose the service"
+kubectl expose deployment/kubernetes-bootcamp -n k8s-tutorial --type="NodePort" --port 8080
+echo "Get running resources"
+kubectl get all -n k8s-tutorial
+
+## The `stop_tutorial` script
+#!/bin/bash
+kubectl delete ns k8s-tutorial
+kubectl get all -A
