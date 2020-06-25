@@ -807,6 +807,7 @@ aizzi@k8sMaster:~$ kubectl describe pods -n k8s-tutorial | grep Image:
 The rollback was successfull.
 
 ## The `start_tutorial` script
+```
 #!/bin/bash
 echo "Create namespace k8s-tutorial"
 kubectl create ns k8s-tutorial
@@ -816,8 +817,11 @@ echo "Expose the service"
 kubectl expose deployment/kubernetes-bootcamp -n k8s-tutorial --type="NodePort" --port 8080
 echo "Get running resources"
 kubectl get all -n k8s-tutorial
+```
 
 ## The `stop_tutorial` script
+```
 #!/bin/bash
 kubectl delete ns k8s-tutorial
 kubectl get all -A
+```
