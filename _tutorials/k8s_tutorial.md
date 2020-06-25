@@ -1,15 +1,15 @@
 ---
 title: "Kubernetes Basics Tutorial"
 description: "Notes and thoughts about the official Kubernetes tutorial"
-last_update: "2020-05-1125"
-published: false
+last_update: "2020-06-25"
+published: true
 ---
 # Kubernetes Tutorial
 ###### Last Updated: {{ page.last_update | date: "%A, %B %d, %Y" }}
 
 This article contains my notes collected while following the [official Kubernetes Tutorials](https://kubernetes.io/docs/tutorials/).
 
-The main reason for it is that the official tutorials use an online Minikube environment, while I ran them using the quasi-production environment setup in a previous tutorial.
+The main reason for it is that the official tutorials use an online Minikube environment, while I ran them using the quasi-production environment setup in a [previous tutorial](https://aizzi.github.io/tutorials/k8s_learning.html).
 
 > **WARNING** : During my tests I discovered that apparently there is no way to easily shutdown a kubernetes cluster. While this is quite expected and desirable in a production environment (after all one of the main points about Kubernetes is to provide resilience), this creates some problem in our little test environment, where we are supposed to shutdown our laptop every day. I discovered that when I do that, the next day the VMs have problems to start and (when they do) the whole kubernetes cluster is gone south. This is not a problem in the official tutorial, because they restart the whole environment every time, so everything is fresh. After few researches, I decided to approach the problem in the following way:
 
