@@ -1,0 +1,51 @@
+@startmindmap
+* NFR
+** Reliability
+***_ Maturity
+***_ Availability
+***_ Fault Tolerance
+***_ Recoverability
+
+** Security
+***_ Confidentiality
+***_ Integrity
+***_ Non-repudiation
+***_ Accountability
+***_ Authenticity
+
+** Maintainability
+***_ Modularity
+***_ Reusability 
+***_ Analysability
+***_ Modifiability
+***_ Testability
+
+** Portability
+***_ Adaptability
+***_ Installability
+***_ Replaceability
+
+left side 
+
+** Suitability
+***_ Completeness
+***_ Correctness
+***_ Appropriateness
+
+** Performance
+***_ Time behaviour
+***_ Resource utilization
+***_ Capacity
+
+** Compatibility
+***_ Coexistence
+***_ Inter-operability
+
+** Usability 
+***_ Appropriateness recognizability
+***_ Learnability
+***_ Operability
+***_ User error protection
+***_ User interface aesthetics
+***_ Accessibility
+@endmindmap

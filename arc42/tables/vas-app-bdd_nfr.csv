@@ -1,0 +1,32 @@
+﻿ID,Type,Sub-Type,Requirement
+NFRxx,Functional Suitability,Completeness,degree to which the set of functions covers all the specified tasks and user objectives
+NFRxx,Functional Suitability,Correctness,degree to which a product or system provides the correct results with the needed degree of precision
+NFRxx,Functional Suitability,Appropriateness,degree to which the functions facilitate the accomplishment of specified tasks and objectives
+NFRxx,Performance Efficiency,Time Behaviour,"degree to which the response and processing times and throughput rates of a product or system, when performing its functions, meet requirements"
+NFRxx,Performance Efficiency,Resource Utilization,"degree to which the amounts and types of resources used by a product or system, when performing its functions, meet requirements"
+NFRxx,Performance Efficiency,Capacity,degree to which the maximum limits of a product or system parameter meet requirements
+NFRxx,Compatibility,Co-Existence,"degree to which a product can perform its required functions efficiently while sharing a common environment and resources with other products, without detrimental impact on any other product"
+NFRxx,Compatibility,Interoperability,"degree to which two or more systems, products or components can exchange information and use the information that has been exchanged"
+NFRxx,Usability,Approriateness Recognizability,degree to which users can recognize whether a product or system is appropriate for their needs
+NFRxx,Usability,Learnability,"degree to which a product or system can be used by specified users to achieve specified goals of learning to use the product or system with effectiveness, efficiency, freedom from risk and satisfaction in a specified context of use"
+NFRxx,Usability,Operability,degree to which a product or system has attributes that make it easy to operate and control
+NFRxx,Usability,User Error Protection,degree to which a system protects users against making errors
+NFRxx,Usability,User Interface Aesthetics,degree to which a user interface enables pleasing and satisfying interaction for the user
+NFRxx,Usability,Accessibility,degree to which a product or system can be used by people with the widest range of characteristics and capabilities to achieve a specified goal in a specified context of use
+NFRxx,Reliability,Maturity,"degree to which a system, product or component meets needs for reliability under normal operation"
+NFRxx,Reliability,Availability,"degree to which a system, product or component is operational and accessible when required for use"
+NFRxx,Reliability,Fault Tolerance,"degree to which a system, product or component operates as intended despite the presence of hardware or software faults"
+NFRxx,Reliability,Recoverability,"degree to which, in the event of an interruption or a failure, a product or system can recover the data directly affected and re-establish the desired state of the system"
+NFRxx,Security,Confidentiality,degree to which a product or system ensures that data are accessible only to those authorized to have access
+NFRxx,Security,Integrity,"degree to which a system, product or component prevents unauthorized access to, or modification of, computer programs or data"
+NFRxx,Security,Non-Repudiation,"degree to which actions or events can be proven to have taken place, so that the events or actions cannot be repudiated later"
+NFRxx,Security,Accountability,degree to which the actions of an entity can be traced uniquely to the entity
+NFRxx,Security,Authenticity,degree to which the identity of a subject or resource can be proved to be the one claimed
+NFRxx,Maintainability,Modularity,degree to which a system or computer program is composed of discrete components such that a change to one component has minimal impact on other components
+NFRxx,Maintainability,Reusability,"degree to which an asset can be used in more than one system, or in building other assets"
+NFRxx,Maintainability,Analysability,"degree of effectiveness and efficiency with which it is possible to assess the impact on a product or system of an intended change to one or more of its parts, or to diagnose a product for deficiencies or causes of failures, or to identify parts to be modified"
+NFRxx,Maintainability,Modifiability,degree to which a product or system can be effectively and efficiently modified without introducing defects or degrading existing product quality
+NFRxx,Maintainability,Testability,"degree of effectiveness and efficiency with which test criteria can be established for a system, product or component and tests can be performed to determine whether those criteria have been met"
+NFRxx,Portability,Adaptability,"degree to which a product or system can effectively and efficiently be adapted for different or evolving hardware, software or other operational or usage environments"
+NFRxx,Portability,Installability,degree of effectiveness and efficiency with which a product or system can be successfully installed and/or uninstalled in a specified environment
+NFRxx,Portability,Replaceability,degree to which a product can replace another specified software product for the same purpose in the same environment
