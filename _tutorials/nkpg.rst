@@ -2,7 +2,7 @@
 title: "How to Use Keycloak behind Nginx to serve Prometheus and Grafana"
 description: "End to end tutorial describing how to deploy Keycloak behind Nginx reverse proxy in order to authorize users to access Prometheus and Grafana servers"
 last_update: "2020-07-20"
-published: true
+published: false
 ---
 
 ================================================================
